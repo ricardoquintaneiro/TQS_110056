@@ -93,10 +93,17 @@ public class TqsStackTest {
     @DisplayName("Popping from an empty stack does throw a NoSuchElementException")
     @Test
     void checkPoppingWhenEmptyException() {
-        NoSuchElementException thrown = Assertions.assertThrows(NoSuchElementException.class, () -> {
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
             wordsStack.pop();
-        }, "NoSuchElement exception");
-
-        
+        });
     }
+
+    @DisplayName("Peeking into an empty stack does throw a NoSuchElementException")
+    @Test
+    void checkPeekingWhenEmptyException() {
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            wordsStack.peek();
+        });
+    }
+
 }
