@@ -5,9 +5,15 @@ import java.util.NoSuchElementException;
 
 public class TqsStack<T> {
     private LinkedList<T> collection;
+    private int maxSize = -1;
 
     public TqsStack() {
         this.collection = new LinkedList<>();
+    }
+
+    public TqsStack(int maxSize) {
+        this.collection = new LinkedList<>();
+        this.maxSize = maxSize;
     }
 
     public T pop() {
@@ -29,6 +35,9 @@ public class TqsStack<T> {
     }
 
     public void push(T item) {
+        if (collection.size() == maxSize) {
+            throw new IllegalStateException("Stack is full. Cannot push element.");
+        }
         collection.push(item);
     }
 

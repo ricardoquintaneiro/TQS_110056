@@ -106,4 +106,16 @@ public class TqsStackTest {
         });
     }
 
+    @DisplayName("For bounded stacks: pushing elements over the limit does throw a IllegalStateException")
+    @Test
+    void checkPushingOverLimitException() {
+        wordsStack = new TqsStack<>(2);
+        wordsStack.push("Alpha");
+        wordsStack.push("Bravo");
+
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            wordsStack.push("Charlie");
+        });
+    }
+
 }
