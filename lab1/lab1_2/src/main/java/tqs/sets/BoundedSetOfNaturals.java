@@ -17,13 +17,12 @@ public class BoundedSetOfNaturals implements Iterable<Integer> {
     private int maxSize;
 
     public void add(int element) {
-        if (this.collection.size() >= maxSize) {
-            throw new IllegalArgumentException("bounded set is full. no more elements allowed.");
-        }
         if (this.collection.contains(element)) {
             throw new IllegalArgumentException("duplicate value: " + element);
         }
-
+        if (this.collection.size() >= maxSize) {
+            throw new IllegalArgumentException("bounded set is full. no more elements allowed.");
+        }
         if (element <= 0) {
             throw new IllegalArgumentException("Illegal argument: not a natural number");
         }

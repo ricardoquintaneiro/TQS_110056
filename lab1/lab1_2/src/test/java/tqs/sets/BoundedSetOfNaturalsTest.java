@@ -35,13 +35,15 @@ class BoundedSetOfNaturalsTest {
         assertTrue(setA.contains(99), "add: added element not found in set.");
         assertEquals(1, setA.size());
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
             setB.add(11);
         });
         assertEquals(exception.getMessage(), "bounded set is full. no more elements allowed.");
 
-        setC.add(50);
-        assertEquals(2, setC.size());
+        exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            setB.add(50);
+        });
+        assertEquals(exception.getMessage(), "duplicate value: 50");
     }
 
     @Test
