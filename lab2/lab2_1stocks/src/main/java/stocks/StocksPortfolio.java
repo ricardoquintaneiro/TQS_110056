@@ -1,5 +1,6 @@
 package stocks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StocksPortfolio {
@@ -8,6 +9,7 @@ public class StocksPortfolio {
 
     public StocksPortfolio(IStockMarketService stockmarket) {
         this.stockmarket = stockmarket;
+        this.stocks = new ArrayList<Stock>();
     }
 
     public void addStock(Stock stock) {
