@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import connection.TqsBasicHttpClient;
@@ -100,6 +102,7 @@ class AddressResolverTest {
 
         assertTrue(result.isPresent());
         assertEquals(expected, result.get());
+        Mockito.verify(httpClient, times(1)).doHttpGet(anyString());
 
     }
 
@@ -136,6 +139,6 @@ class AddressResolverTest {
         Optional<Address> result = resolver.findAddressForLocation( -361,-361);
         // verify no valid result
         assertFalse( result.isPresent());
-
+        Mockito.verify(httpClient, times(1)).doHttpGet(anyString());
     }
 }
