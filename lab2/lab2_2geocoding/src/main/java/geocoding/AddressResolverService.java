@@ -58,7 +58,6 @@ public class AddressResolverService {
 
     private static String prepareUriForRemoteEndpoint(double latitude, double longitude) throws URISyntaxException {
 
-        //TODO: set the API key in the resources/config.properties file
         String apiKey = ConfigUtils.getPropertyFromConfig("mapquest_key");
 
         URIBuilder uriBuilder = new URIBuilder("https://www.mapquestapi.com/geocoding/v1/reverse");

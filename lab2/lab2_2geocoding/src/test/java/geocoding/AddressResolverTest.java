@@ -98,8 +98,8 @@ class AddressResolverTest {
         //return
         Address expected = new Address( "Avenida da Universidade", "Aveiro","3810-489", "");
 
-        assertTrue( result.isPresent());
-        assertEquals( expected, result.get());
+        assertTrue(result.isPresent());
+        assertEquals(expected, result.get());
 
     }
 
