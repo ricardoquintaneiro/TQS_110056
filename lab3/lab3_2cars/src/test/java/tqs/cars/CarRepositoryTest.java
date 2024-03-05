@@ -31,29 +31,19 @@ class CarRepositoryTest {
 
     @SuppressWarnings("null")
     @Test
-    void whenFindFerrariById_thenReturnFerrari() {
+    void whenFindCarByExistingId_thenReturnCar() {
         entityManager.persistAndFlush(ferrari);
-        Car found = carRepository.findById(ferrari.getCarId()).orElse(null);
-        assertThat(found).isNotNull();
-        assertThat(found.getCarId()).isEqualTo(ferrari.getCarId());
-        assertThat(found.getMaker()).isEqualTo(ferrari.getMaker());
-        assertThat(found.getModel()).isEqualTo(ferrari.getModel());
-    }
-
-    @Test
-    void whenInvalidCarName_thenReturnNull() {
-        Car fromDb = carRepository.findByName("Does Not Exist");
-        assertThat(fromDb).isNull();
-    }
-
-    @Test
-    void whenFindEmployedByExistingId_thenReturnCar() {
-        Car emp = new Car("test", "test@deti.com");
-        entityManager.persistAndFlush(emp);
-
-        Car fromDb = carRepository.findById(emp.getCarId()).orElse(null);
+        Car fromDb = carRepository.findById(ferrari.getCarId()).orElse(null);
         assertThat(fromDb).isNotNull();
-        assertThat(fromDb.getEmail()).isEqualTo(emp.getEmail());
+        assertThat(fromDb.getCarId()).isEqualTo(ferrari.getCarId());
+        assertThat(fromDb.getMaker()).isEqualTo(ferrari.getMaker());
+        assertThat(fromDb.getModel()).isEqualTo(ferrari.getModel());
+    }
+
+    @Test
+    void whenInvalidCarId_thenReturnNull() {
+        Car fromDb = carRepository.findById(2l).orElse(null);
+        assertThat(fromDb).isNull();
     }
 
     @Test
@@ -64,18 +54,17 @@ class CarRepositoryTest {
 
     @Test
     void givenSetOfCars_whenFindAll_thenReturnAllCars() {
-        Car alex = new Car("alex", "alex@deti.com");
-        Car ron = new Car("ron", "ron@deti.com");
-        Car bob = new Car("bob", "bob@deti.com");
+        Car bmw = new Car(2l, "BMW", "M3");
+        Car audi = new Car(3l, "Audi", "A4");
 
-        entityManager.persist(alex);
-        entityManager.persist(bob);
-        entityManager.persist(ron);
+        entityManager.persist(ferrari);
+        entityManager.persist(bmw);
+        entityManager.persist(audi);
         entityManager.flush();
 
         List<Car> allCars = carRepository.findAll();
 
-        assertThat(allCars).hasSize(3).extracting(Car::getName).containsOnly(alex.getName(), ron.getName(), bob.getName());
+        assertThat(allCars).hasSize(3).extracting(Car::getMaker).containsOnly(ferrari.getMaker(), bmw.getMaker(), audi.getMaker());
     }
 
 }
