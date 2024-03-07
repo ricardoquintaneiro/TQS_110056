@@ -5,7 +5,6 @@ import tqs.cars.data.CarRepository;
 import tqs.cars.model.Car;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarManagerService {
@@ -27,7 +26,7 @@ public class CarManagerService {
         return carRepository.findAll();
     }
 
-    public Optional<Car> getCarDetails(Long carId) {
-        return Optional.of(carRepository.findByCarId(carId) );
+    public Car getCarDetails(Long carId) {
+        return carRepository.findByCarId(carId).orElse(null);
     }
 }
