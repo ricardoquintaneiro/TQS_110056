@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -40,7 +41,7 @@ class CarControllerTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        ferrari = new Car(1l, "Ferrari", "458 Italia");
+        ferrari = new Car(1L, "Ferrari", "458 Italia");
     }
 
     @SuppressWarnings("null")
@@ -64,23 +65,23 @@ class CarControllerTest {
         Car porsche = new Car("Porsche", "911 Turbo");
         Car bmw = new Car(7l, "BMW", "M3");
         Car car = new Car();
-        List<Car> allCars = Arrays.asList(ferrari, porsche);
+        List<Car> allCars = Arrays.asList(ferrari, porsche, bmw, car);
 
         when(carManagerService.getAllCars()).thenReturn(allCars);
 
         mvc.perform(get("/api/cars")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(5)))
-                .andExpect(jsonPath("$[0].id", is(ferrari.getCarId())))
+                .andExpect(jsonPath("$", hasSize(4)))
+                .andExpect(jsonPath("$[0].carId", is(ferrari.getCarId().intValue())))
                 .andExpect(jsonPath("$[0].maker", is(ferrari.getMaker())))
                 .andExpect(jsonPath("$[0].model", is(ferrari.getModel())))
                 .andExpect(jsonPath("$[1].maker", is(porsche.getMaker())))
                 .andExpect(jsonPath("$[1].model", is(porsche.getModel())))
-                .andExpect(jsonPath("$[2].id", is(bmw.getCarId())))
+                .andExpect(jsonPath("$[2].carId", is(bmw.getCarId().intValue())))
                 .andExpect(jsonPath("$[2].maker", is(bmw.getMaker())))
                 .andExpect(jsonPath("$[2].model", is(bmw.getModel())))
-                .andExpect(jsonPath("$[3].id", is(car.getCarId())));
+                .andExpect(jsonPath("$[3].carId", nullValue()));
 
         verify(carManagerService, times(1)).getAllCars();
     }

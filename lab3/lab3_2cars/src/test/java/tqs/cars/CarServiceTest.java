@@ -8,8 +8,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.mockito.junit.jupiter.MockitoExtension;
-import tqs.cars.model.Car;
+
 import tqs.cars.data.CarRepository;
+import tqs.cars.model.Car;
 import tqs.cars.services.CarManagerService;
 
 import java.util.Arrays;
@@ -21,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 class CarServiceTest {
 
-    @Mock( lenient = true)
+    @Mock(lenient = true)
     private CarRepository carRepository;
 
     @InjectMocks
@@ -38,9 +39,9 @@ class CarServiceTest {
 
         List<Car> allCars = Arrays.asList(ferrari, bmw, lamborghini);
 
-        Mockito.when(carRepository.findByCarId(ferrari.getCarId())).thenReturn(Optional.of(ferrari));
-        Mockito.when(carRepository.findByCarId(bmw.getCarId())).thenReturn(Optional.of(bmw));
-        Mockito.when(carRepository.findByCarId(lamborghini.getCarId())).thenReturn(Optional.of(lamborghini));
+        Mockito.when(carRepository.findByCarId(ferrari.getCarId())).thenReturn(ferrari);
+        Mockito.when(carRepository.findByCarId(bmw.getCarId())).thenReturn(null);
+        Mockito.when(carRepository.findByCarId(lamborghini.getCarId())).thenReturn(null);
         Mockito.when(carRepository.findAll()).thenReturn(allCars);
         Mockito.when(carRepository.findById(-99L)).thenReturn(Optional.empty());
     }
@@ -48,7 +49,7 @@ class CarServiceTest {
 
     @Test
      void whenValidId_thenCarShouldBeFound() {
-        Car fromDb = carService.getCarDetails(1L);
+        Car fromDb = carService.getCarDetails(1L).orElse(null);
         assertThat(fromDb.getMaker()).isEqualTo("Ferrari");
         assertThat(fromDb.getModel()).isEqualTo("458 Italia");
 
@@ -57,7 +58,7 @@ class CarServiceTest {
 
     @Test
      void whenInvalidId_thenCarShouldNotBeFound() {
-        Car fromDb = carService.getCarDetails(-99L);
+        Car fromDb = carService.getCarDetails(-99L).orElse(null);
         verifyFindByIdIsCalledOnce();
         assertThat(fromDb).isNull();
     }
@@ -75,7 +76,7 @@ class CarServiceTest {
     }
 
     private void verifyFindByIdIsCalledOnce() {
-        Mockito.verify(carRepository, VerificationModeFactory.times(1)).findById(Mockito.anyLong());
+        Mockito.verify(carRepository, VerificationModeFactory.times(1)).findByCarId(Mockito.anyLong());
     }
 
     private void verifyFindAllCarsIsCalledOnce() {

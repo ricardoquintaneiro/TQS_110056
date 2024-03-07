@@ -1,10 +1,12 @@
 package tqs.cars.services;
 
 import org.springframework.stereotype.Service;
+
 import tqs.cars.data.CarRepository;
 import tqs.cars.model.Car;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarManagerService {
@@ -26,7 +28,7 @@ public class CarManagerService {
         return carRepository.findAll();
     }
 
-    public Car getCarDetails(Long carId) {
-        return carRepository.findByCarId(carId).orElse(null);
+    public Optional<Car> getCarDetails(Long carId) {
+        return Optional.ofNullable(carRepository.findByCarId(carId));
     }
 }
