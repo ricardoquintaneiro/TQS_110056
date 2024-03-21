@@ -1,13 +1,13 @@
 package tqs.book_search;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Book {
     private final String title;
     private final String author;
-    private final Date published;
+    private final LocalDate published;
 
-    public Book(String title, String author, Date published) {
+    public Book(String title, String author, LocalDate published) {
         this.title = title;
         this.author = author;
         this.published = published;
@@ -21,7 +21,7 @@ public class Book {
         return author;
     }
 
-    public Date getPublished() {
+    public LocalDate getPublished() {
         return published;
     }
 

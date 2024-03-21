@@ -8,4 +8,8 @@ public class Utils {
         return LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
     }
 
+    public static LocalDate isoTextToLocalDate(String string) {
+        return LocalDate.parse(string);
+    }
+
 }
