@@ -5,11 +5,12 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BookFlightSteps {
 
@@ -17,20 +18,21 @@ public class BookFlightSteps {
 
     @When("I navigate to {string}")
     public void iNavigateTo(String url) {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions().setBinary("/usr/bin/brave-browser");
+        driver = new ChromeDriver(options);
         driver.get(url);
     }
 
 	@And("I select the origin as {string}")
 	public void iSelectTheOriginAs(String origin) {
 		driver.findElement(By.name("fromPort")).click();
-		driver.findElement(By.id("Boston")).click();
+		driver.findElement(By.xpath("//option[. = '" + origin + "']")).click();
 	}
 	
 	@And("I select the destination as {string}")
 	public void iSelectTheDestinationAs(String destination) {
 		driver.findElement(By.name("toPort")).click();
-		driver.findElement(By.id("Dublin")).click();
+		driver.findElement(By.xpath("//option[. = '" + destination +"']")).click();
 	}
 
 	@And("I click find flights")
@@ -38,7 +40,7 @@ public class BookFlightSteps {
 		driver.findElement(By.cssSelector(".btn-primary")).click();
 	}
 
-	@Then("I should see a list of flights")
+	@Then("I should see a list of available flights")
 	public void iShouldSeeAListOfFlights() {
 		assertThat(driver.findElements(By.cssSelector("table")).size(), equalTo(1));
 	}
@@ -54,9 +56,9 @@ public class BookFlightSteps {
 		driver.findElement(By.cssSelector(".btn-primary")).click();
 	}
 
-	@Then("I should see a confirmation message")
+	@Then("I should see a confirmation page")
 	public void iShouldSeeThePurchaseConfirmation() {
-		assertThat(driver.findElements(By.cssSelector("h1")).size(), equalTo(1));
+		assertThat(driver.getTitle(), equalTo("BlazeDemo Confirmation"));
 		driver.quit();
 	}
 

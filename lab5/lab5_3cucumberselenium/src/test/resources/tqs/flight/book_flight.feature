@@ -9,4 +9,4 @@ Feature: Booking a flight
 
         When I select flight 2
         And I click purchase flight
-        Then I should see a confirmation message 
+        Then I should see a confirmation page
