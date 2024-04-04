@@ -26,3 +26,7 @@ I established a custom gate that allows the 60% coverage to pass under the new g
 
 #### b) Increments to source code
 
+The new code seems to smell, especially in terms of the use of unnecessary static fields and other useless pieces of code.
+
+![Smelly details](smellydetails.png)
+![Smelly code](smellycode.png)
