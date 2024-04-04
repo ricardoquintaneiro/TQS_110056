@@ -82,4 +82,5 @@ class CarServiceTest {
     private void verifyFindAllCarsIsCalledOnce() {
         Mockito.verify(carRepository, VerificationModeFactory.times(1)).findAll();
     }
+
 }

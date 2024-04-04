@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
-public class CarRestControllerIT {
+class CarRestControllerIT {
     
     // will need to use the server port for the invocation url
     @LocalServerPort
