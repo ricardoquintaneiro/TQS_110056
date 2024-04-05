@@ -1,13 +1,13 @@
-package tqs.testcontainers.lab7_3testcontainers;
+package tqs.testcontainers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Lab73testcontainersApplication {
+public class TestcontainersApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Lab73testcontainersApplication.class, args);
+		SpringApplication.run(TestcontainersApplication.class, args);
 	}
 
 }

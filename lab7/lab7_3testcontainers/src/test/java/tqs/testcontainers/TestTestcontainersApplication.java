@@ -1,4 +1,4 @@
-package tqs.testcontainers.lab7_3testcontainers;
+package tqs.testcontainers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -8,7 +8,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @TestConfiguration(proxyBeanMethods = false)
-public class TestLab73testcontainersApplication {
+public class TestTestcontainersApplication {
 
 	@Bean
 	@ServiceConnection
@@ -17,7 +17,7 @@ public class TestLab73testcontainersApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.from(Lab73testcontainersApplication::main).with(TestLab73testcontainersApplication.class).run(args);
+		SpringApplication.from(TestcontainersApplication::main).with(TestTestcontainersApplication.class).run(args);
 	}
 
 }
