@@ -1,6 +1,7 @@
 package tqs.testcontainers;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -50,5 +51,13 @@ class TestcontainersApplicationTests {
 		assert book.getAuthor().equals("J.R.R. Tolkien");
 		assert book.getPublicationDate().equals(LocalDate.of(1937, 9, 21));
 	}
+
+	@Test
+	@Order(3)
+	void findAllTolkienBooks() {
+		List<Book> books = bookRepository.findByAuthor("J.R.R. Tolkien");
+		assert books.size() == 3;
+	}
+
 
 }
