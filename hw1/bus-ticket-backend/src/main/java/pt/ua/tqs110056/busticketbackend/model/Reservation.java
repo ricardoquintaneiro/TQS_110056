@@ -34,10 +34,11 @@ public class Reservation {
     public Reservation() {
     }
     
-    public Reservation(Passenger passenger, Trip trip, BusSeat seat) {
+    public Reservation(Passenger passenger, Trip trip, BusSeat seat, CreditCard creditCard) {
         this.passenger = passenger;
         this.trip = trip;
         this.seat = seat;
+        this.creditCard = creditCard;
     }
 
     public Long getId() {
@@ -72,6 +73,14 @@ public class Reservation {
         this.seat = seat;
     }
 
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
     public ReservationStatus getStatus() {
         return status;
     }
@@ -96,6 +105,7 @@ public class Reservation {
         result = prime * result + ((passenger == null) ? 0 : passenger.hashCode());
         result = prime * result + ((trip == null) ? 0 : trip.hashCode());
         result = prime * result + ((seat == null) ? 0 : seat.hashCode());
+        result = prime * result + ((creditCard == null) ? 0 : creditCard.hashCode());
         result = prime * result + ((status == null) ? 0 : status.hashCode());
         result = prime * result + ((reservationTime == null) ? 0 : reservationTime.hashCode());
         return result;
@@ -130,6 +140,11 @@ public class Reservation {
                 return false;
         } else if (!seat.equals(other.seat))
             return false;
+        if (creditCard == null) {
+            if (other.creditCard != null)
+                return false;
+        } else if (!creditCard.equals(other.creditCard))
+            return false;
         if (status != other.status)
             return false;
         if (reservationTime == null) {
@@ -142,7 +157,8 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation [id=" + id + ", passenger=" + passenger + ", trip=" + trip + ", seat=" + seat + ", status="
-                + status + ", reservationTime=" + reservationTime + "]";
+        return "Reservation [id=" + id + ", passenger=" + passenger + ", trip=" + trip + ", seat=" + seat
+                + ", creditCard=" + creditCard + ", status=" + status + ", reservationTime=" + reservationTime + "]";
     }
+
 }
