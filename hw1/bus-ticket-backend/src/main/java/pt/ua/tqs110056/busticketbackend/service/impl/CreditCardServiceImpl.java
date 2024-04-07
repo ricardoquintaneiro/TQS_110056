@@ -2,6 +2,7 @@ package pt.ua.tqs110056.busticketbackend.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pt.ua.tqs110056.busticketbackend.model.CreditCard;
@@ -11,8 +12,9 @@ import pt.ua.tqs110056.busticketbackend.service.CreditCardService;
 @Service
 public class CreditCardServiceImpl implements CreditCardService {
 
-    private CreditCardRepository creditCardRepository;
+    private final CreditCardRepository creditCardRepository;
 
+    @Autowired
     public CreditCardServiceImpl(CreditCardRepository creditCardRepository) {
         this.creditCardRepository = creditCardRepository;
     }

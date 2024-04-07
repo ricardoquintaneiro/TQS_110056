@@ -3,6 +3,7 @@ package pt.ua.tqs110056.busticketbackend.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pt.ua.tqs110056.busticketbackend.model.City;
@@ -12,8 +13,9 @@ import pt.ua.tqs110056.busticketbackend.service.CityService;
 @Service
 public class CityServiceImpl implements CityService {
 
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
+    @Autowired
     public CityServiceImpl(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
     }

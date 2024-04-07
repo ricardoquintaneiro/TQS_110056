@@ -21,4 +21,6 @@ public interface ReservationService {
     
     List<Reservation> getReservationsByTripId(Long tripId);
 
+    boolean confirmReservation(Long id);
+
 }

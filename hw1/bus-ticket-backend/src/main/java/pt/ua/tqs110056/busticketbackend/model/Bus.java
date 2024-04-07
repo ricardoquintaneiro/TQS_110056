@@ -1,5 +1,6 @@
 package pt.ua.tqs110056.busticketbackend.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -21,6 +22,8 @@ public class Bus {
     @OneToMany
     private List<BusSeat> seats;
 
+    private boolean[] seatsAvailability;
+
     public Bus() {
     }
 
@@ -28,6 +31,10 @@ public class Bus {
         this.plate = plate;
         this.model = model;
         this.seats = seats;
+
+        // initialize seats availability array with all seats available
+        this.seatsAvailability = new boolean[seats.size()];
+        Arrays.fill(this.seatsAvailability, true);
     }
 
     public Long getId() {
@@ -62,6 +69,22 @@ public class Bus {
         this.seats = seats;
     }
 
+    public boolean[] getSeatsAvailability() {
+        return seatsAvailability;
+    }
+
+    public void setSeatsAvailability(boolean[] seatsAvailability) {
+        this.seatsAvailability = seatsAvailability;
+    }
+
+    public boolean getSeatAvailability(int index) {
+        return seatsAvailability[index];
+    }
+
+    public void setSeatAvailability(int index, boolean availability) {
+        seatsAvailability[index] = availability;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -70,6 +93,7 @@ public class Bus {
         result = prime * result + ((plate == null) ? 0 : plate.hashCode());
         result = prime * result + ((model == null) ? 0 : model.hashCode());
         result = prime * result + ((seats == null) ? 0 : seats.hashCode());
+        result = prime * result + Arrays.hashCode(seatsAvailability);
         return result;
     }
 
@@ -102,13 +126,9 @@ public class Bus {
                 return false;
         } else if (!seats.equals(other.seats))
             return false;
+        if (!Arrays.equals(seatsAvailability, other.seatsAvailability))
+            return false;
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Bus [id=" + id + ", plate=" + plate + ", model=" + model + ", seats=" + seats + "]";
-    }
-
 
 }

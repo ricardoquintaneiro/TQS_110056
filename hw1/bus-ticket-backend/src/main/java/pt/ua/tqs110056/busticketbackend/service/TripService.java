@@ -13,4 +13,6 @@ public interface TripService {
 
     List<Trip> findTripsByOriginAndDestinationAndDepartureDate(long originId, long destinationId, LocalDate departureDate);
 
+    List<Trip> findAllTrips();
+
 }
