@@ -24,10 +24,22 @@ public class Passenger {
         return pattern.matcher(email).matches();
     }
 
+    public boolean isValidPhoneNumber(String phoneNumber) {
+        String phoneNumberPattern = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+        Pattern pattern = Pattern.compile(phoneNumberPattern);
+        return pattern.matcher(phoneNumber).matches();
+    }
+
     public Passenger() {
     }
 
     public Passenger(String name, String email, String phoneNumber) {
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email");
+        }
+        if (!isValidPhoneNumber(phoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -54,6 +66,9 @@ public class Passenger {
     }
 
     public void setEmail(String email) {
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email");
+        }
         this.email = email;
     }
 
@@ -62,6 +77,9 @@ public class Passenger {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        if (!isValidPhoneNumber(phoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
         this.phoneNumber = phoneNumber;
     }
 

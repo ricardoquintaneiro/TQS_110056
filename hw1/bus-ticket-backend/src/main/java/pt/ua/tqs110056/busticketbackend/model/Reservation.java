@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -15,16 +16,16 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Passenger passenger;
 
-    @OneToOne
+    @ManyToOne
     private Trip trip;
 
     @OneToOne
     private BusSeat seat;
 
-    @OneToOne
+    @ManyToOne
     private CreditCard creditCard;
 
     private ReservationStatus status;

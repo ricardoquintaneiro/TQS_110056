@@ -24,6 +24,12 @@ public class CreditCard {
     }
 
     public CreditCard(CreditCardType type, String number, String cvv, LocalDate expirationDate) {
+        if (!isValidCreditCardNumber(number)) {
+            throw new IllegalArgumentException("Invalid credit card number");
+        }
+        if (!isValidCVV(cvv)) {
+            throw new IllegalArgumentException("Invalid CVV");
+        }
         this.type = type;
         this.number = number;
         this.cvv = cvv;
@@ -63,6 +69,9 @@ public class CreditCard {
     }
 
     public void setNumber(String number) {
+        if (!isValidCreditCardNumber(number)) {
+            throw new IllegalArgumentException("Invalid credit card number");
+        }
         this.number = number;
     }
 
@@ -71,6 +80,9 @@ public class CreditCard {
     }
 
     public void setCvv(String cvv) {
+        if (!isValidCVV(cvv)) {
+            throw new IllegalArgumentException("Invalid CVV");
+        }
         this.cvv = cvv;
     }
 
