@@ -33,6 +33,7 @@ public class CityController {
     public ResponseEntity<List<City>> getAllCities() {
         logger.info("Fetching all cities");
         List<City> cities = cityService.getAllCities();
+        logger.info("Returning {} cities", cities.size());
         return ResponseEntity.ok(cities);
     }
 
