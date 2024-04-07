@@ -14,6 +14,4 @@ public interface BusRepository extends JpaRepository<Bus, Long> {
 
     Optional<Bus> findByPlate(String plate);
     
-    Optional<Bus> findBySeatId(long seatId);
-
 }

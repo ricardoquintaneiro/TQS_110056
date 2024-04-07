@@ -27,13 +27,13 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<Trip> findTripsByDepartureDate(LocalDate departureDate) {
-        return tripRepository.findByDepartureDate(departureDate);
+        return tripRepository.findByDepartureTime(departureDate);
     }
 
     @Override
     public List<Trip> findTripsByOriginAndDestinationAndDepartureDate(long originId, long destinationId,
             LocalDate departureDate) {
-        return tripRepository.findByOriginIdAndDestinationIdAndDepartureDate(originId, destinationId, departureDate);
+        return tripRepository.findByOriginIdAndDestinationIdAndDepartureTime(originId, destinationId, departureDate);
     }
 
     @Override

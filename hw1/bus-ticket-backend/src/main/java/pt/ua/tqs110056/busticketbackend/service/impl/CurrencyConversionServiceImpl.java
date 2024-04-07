@@ -12,7 +12,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import pt.ua.tqs110056.busticketbackend.config.CustomTtlCacheManager;
 import pt.ua.tqs110056.busticketbackend.service.CurrencyConversionService;
 
 @Service
@@ -25,7 +24,7 @@ public class CurrencyConversionServiceImpl implements CurrencyConversionService 
 
     private final RestTemplate restTemplate;
 
-    private CurrencyConversionServiceImpl(RestTemplate restTemplate, CustomTtlCacheManager cacheManager) {
+    public CurrencyConversionServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

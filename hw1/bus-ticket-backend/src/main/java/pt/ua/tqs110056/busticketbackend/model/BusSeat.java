@@ -13,14 +13,14 @@ public class BusSeat {
     private Long id;
 
     private BusSeatType type;
-    private String seatNumber;
+    private String number;
 
     public BusSeat() {
     }
 
     public BusSeat(BusSeatType type, String seatNumber) {
         this.type = type;
-        this.seatNumber = seatNumber;
+        this.number = seatNumber;
     }
 
     public Long getId() {
@@ -39,12 +39,12 @@ public class BusSeat {
         this.type = type;
     }
 
-    public String getSeatNumber() {
-        return seatNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
+    public void setNumber(String seatNumber) {
+        this.number = seatNumber;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class BusSeat {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((type == null) ? 0 : type.hashCode());
-        result = prime * result + ((seatNumber == null) ? 0 : seatNumber.hashCode());
+        result = prime * result + ((number == null) ? 0 : number.hashCode());
         return result;
     }
 
@@ -73,16 +73,16 @@ public class BusSeat {
             return false;
         if (type != other.type)
             return false;
-        if (seatNumber == null) {
-            if (other.seatNumber != null)
+        if (number == null) {
+            if (other.number != null)
                 return false;
-        } else if (!seatNumber.equals(other.seatNumber))
+        } else if (!number.equals(other.number))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "BusSeat [id=" + id + ", type=" + type + ", seatNumber=" + seatNumber + "]";
+        return "BusSeat [id=" + id + ", type=" + type + ", seatNumber=" + number + "]";
     }
 }

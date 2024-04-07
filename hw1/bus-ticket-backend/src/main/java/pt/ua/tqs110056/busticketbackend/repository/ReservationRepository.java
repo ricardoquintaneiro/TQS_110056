@@ -13,7 +13,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     Optional<Reservation> findById(long id);
 
-    Optional<Reservation> findByTripAndSeatNumber(long tripId, int seatNumber);
+    Optional<Reservation> findByTripIdAndSeatNumber(long tripId, String seatNumber);
 
     List<Reservation> findByPassengerId(long passengerId);
 

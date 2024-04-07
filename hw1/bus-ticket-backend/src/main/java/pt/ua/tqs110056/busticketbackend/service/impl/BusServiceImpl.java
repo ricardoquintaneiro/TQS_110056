@@ -109,7 +109,7 @@ public class BusServiceImpl implements BusService {
 
     private int findSeatIndex(List<BusSeat> seats, String seatNumber) {
         for (int i = 0; i < seats.size(); i++) {
-            if (seats.get(i).getSeatNumber().equals(seatNumber)) {
+            if (seats.get(i).getNumber().equals(seatNumber)) {
                 return i;
             }
         }
