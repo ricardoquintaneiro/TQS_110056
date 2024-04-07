@@ -3,6 +3,8 @@ package pt.ua.tqs110056.busticketbackend.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ import pt.ua.tqs110056.busticketbackend.service.CityService;
 @RequestMapping("/cities")
 public class CityController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CityController.class);
+
     private final CityService cityService;
 
     @Autowired
@@ -27,19 +31,32 @@ public class CityController {
 
     @GetMapping
     public ResponseEntity<List<City>> getAllCities() {
+        logger.info("Fetching all cities");
         List<City> cities = cityService.getAllCities();
         return ResponseEntity.ok(cities);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<City> getCityById(@PathVariable long id) {
+        logger.info("Fetching city with id {}", id);
         Optional<City> city = cityService.getCityById(id);
+        if (city.isPresent()) {
+            logger.info("City found with id {}", id);
+        } else {
+            logger.warn("No city found with id {}", id);
+        }
         return city.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/search")
     public ResponseEntity<City> getCityByNameAndCountry(@RequestParam String name, @RequestParam String country) {
+        logger.info("Fetching city with name '{}' and country '{}'", name, country);
         Optional<City> city = cityService.getCityByNameAndCountry(name, country);
+        if (city.isPresent()) {
+            logger.info("City found with name '{}' and country '{}'", name, country);
+        } else {
+            logger.warn("No city found with name '{}' and country '{}'", name, country);
+        }
         return city.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 }

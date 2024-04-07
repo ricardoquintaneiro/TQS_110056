@@ -2,6 +2,8 @@ package pt.ua.tqs110056.busticketbackend.controller;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +23,8 @@ import pt.ua.tqs110056.busticketbackend.service.ReservationService;
 @RequestMapping("/reservations")
 public class ReservationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+
     private final ReservationService reservationService;
 
     @Autowired
@@ -31,8 +35,10 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         if (reservation == null) {
+            logger.warn("Invalid reservation at createReservation");
             return ResponseEntity.badRequest().build();
         }
+        logger.info("Creating reservation for passenger with id {}", reservation.getPassenger().getId());
         return ResponseEntity.ok(reservationService.createReservation(reservation));
     }
 
@@ -40,13 +46,16 @@ public class ReservationController {
     public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
         Optional<Reservation> reservation = reservationService.getReservationById(id);
         if (!reservation.isPresent()) {
+            logger.warn("No reservation found with id {}", id);
             return ResponseEntity.notFound().build();
         }
+        logger.info("Reservation found with id {}", id);
         return ResponseEntity.ok(reservation.get());
     }
 
     @DeleteMapping("/{id}")
     public void deleteReservationById(@PathVariable Long id) {
+        logger.info("Deleting reservation with id {}", id);
         reservationService.deleteReservationById(id);
     }
 
@@ -57,12 +66,15 @@ public class ReservationController {
         String message = "";
 
         if ("cancel".equalsIgnoreCase(action)) {
+            logger.info("Cancelling reservation with id {}", id);
             success = reservationService.cancelReservation(id);
             message = success ? "Reservation cancelled successfully" : "Reservation not found";
         } else if ("confirm".equalsIgnoreCase(action)) {
+            logger.info("Confirming reservation with id {}", id);
             success = reservationService.confirmReservation(id);
             message = success ? "Reservation confirmed successfully" : "Reservation not found";
         } else {
+            logger.warn("Invalid action at updateReservationStatus");
             message = "Invalid action";
             return ResponseEntity.badRequest().body(message);
         }
@@ -76,16 +88,19 @@ public class ReservationController {
 
     @GetMapping()
     public ResponseEntity<Iterable<Reservation>> getAllReservations() {
+        logger.info("Fetching all reservations");
         return ResponseEntity.ok(reservationService.getAllReservations());
     }
 
     @GetMapping("/passenger/{passengerId}")
     public ResponseEntity<Iterable<Reservation>> getReservationsByPassengerId(@PathVariable Long passengerId) {
+        logger.info("Fetching reservations for passenger with id {}", passengerId);
         return ResponseEntity.ok(reservationService.getReservationsByPassengerId(passengerId));
     }
 
     @GetMapping("/trip/{tripId}")
     public ResponseEntity<Iterable<Reservation>> getReservationsByTripId(@PathVariable Long tripId) {
+        logger.info("Fetching reservations for trip with id {}", tripId);
         return ResponseEntity.ok(reservationService.getReservationsByTripId(tripId));
     }
 
