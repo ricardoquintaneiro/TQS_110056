@@ -11,8 +11,6 @@ import pt.ua.tqs110056.busticketbackend.model.BusSeatType;
 @Repository
 public interface BusSeatRepository extends JpaRepository<BusSeat, Long> {
 
-    BusSeat findById(long id);
-
     List<BusSeat> findByType(BusSeatType type);
     
 }

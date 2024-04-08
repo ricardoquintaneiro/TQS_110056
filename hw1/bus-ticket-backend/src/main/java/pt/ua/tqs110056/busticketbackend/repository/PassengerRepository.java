@@ -8,6 +8,4 @@ import pt.ua.tqs110056.busticketbackend.model.Passenger;
 @Repository
 public interface PassengerRepository extends JpaRepository<Passenger, Long> {
 
-    Passenger findById(long id);
-
 }

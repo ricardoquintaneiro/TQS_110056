@@ -1,6 +1,8 @@
 package pt.ua.tqs110056.busticketbackend.service.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +29,17 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<Trip> findTripsByDepartureDate(LocalDate departureDate) {
-        return tripRepository.findByDepartureTime(departureDate);
+        LocalDateTime startOfDay = departureDate.atStartOfDay();
+        LocalDateTime endOfDay = departureDate.atTime(LocalTime.MAX);
+        return tripRepository.findByDepartureTimeBetween(startOfDay, endOfDay);
     }
 
     @Override
     public List<Trip> findTripsByOriginAndDestinationAndDepartureDate(long originId, long destinationId,
             LocalDate departureDate) {
-        return tripRepository.findByOriginIdAndDestinationIdAndDepartureTime(originId, destinationId, departureDate);
+        LocalDateTime startOfDay = departureDate.atStartOfDay();
+        LocalDateTime endOfDay = departureDate.atTime(LocalTime.MAX);
+        return tripRepository.findByOriginIdAndDestinationIdAndDepartureTimeBetween(originId, destinationId, startOfDay, endOfDay);
     }
 
     @Override

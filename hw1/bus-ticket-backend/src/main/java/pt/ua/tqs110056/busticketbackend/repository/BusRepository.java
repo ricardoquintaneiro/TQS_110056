@@ -10,8 +10,6 @@ import pt.ua.tqs110056.busticketbackend.model.Bus;
 @Repository
 public interface BusRepository extends JpaRepository<Bus, Long> {
 
-    Optional<Bus> findById(long id);
-
     Optional<Bus> findByPlate(String plate);
     
 }

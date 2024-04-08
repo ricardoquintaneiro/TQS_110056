@@ -11,13 +11,11 @@ import pt.ua.tqs110056.busticketbackend.model.Reservation;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    Optional<Reservation> findById(long id);
+    Optional<Reservation> findByTripIdAndSeatNumber(Long tripId, String seatNumber);
 
-    Optional<Reservation> findByTripIdAndSeatNumber(long tripId, String seatNumber);
+    List<Reservation> findByPassengerId(Long passengerId);
 
-    List<Reservation> findByPassengerId(long passengerId);
+    List<Reservation> findByTripId(Long tripId);
 
-    List<Reservation> findByTripId(long tripId);
-
-    int countByTripId(long tripId);
+    int countByTripId(Long tripId);
 }
