@@ -34,12 +34,16 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-        if (reservation == null) {
+        try {
+            logger.info("Creating reservation for passenger with id {}", reservation.getPassenger().getId());
+            return ResponseEntity.status(201).body(reservationService.createReservation(reservation));
+        } catch (NullPointerException e) {
             logger.warn("Invalid reservation at createReservation");
             return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            logger.error("Error at createReservation", e);
+            return ResponseEntity.internalServerError().build();
         }
-        logger.info("Creating reservation for passenger with id {}", reservation.getPassenger().getId());
-        return ResponseEntity.ok(reservationService.createReservation(reservation));
     }
 
     @GetMapping("/{id}")
@@ -54,9 +58,10 @@ public class ReservationController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteReservationById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteReservationById(@PathVariable Long id) {
         logger.info("Deleting reservation with id {}", id);
         reservationService.deleteReservationById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")

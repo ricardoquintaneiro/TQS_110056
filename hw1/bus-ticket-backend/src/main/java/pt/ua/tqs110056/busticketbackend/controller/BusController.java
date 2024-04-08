@@ -111,7 +111,7 @@ public class BusController {
         if (success) {
             return ResponseEntity.ok(message);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.unprocessableEntity().body(message);
         }
     }
 

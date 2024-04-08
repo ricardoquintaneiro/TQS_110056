@@ -30,21 +30,21 @@ public class CurrencyConversionController {
     @GetMapping("/convert")
     public ResponseEntity<BigDecimal> convertCurrency(
             @RequestParam BigDecimal amount,
-            @RequestParam Currency sourceCurrency,
-            @RequestParam Currency targetCurrency) {
-        logger.info("Converting {} from {} to {}", amount, sourceCurrency, targetCurrency);
-        BigDecimal convertedAmount = currencyConversionService.convertCurrency(amount, sourceCurrency, targetCurrency);
+            @RequestParam Currency from,
+            @RequestParam Currency to) {
+        logger.info("Converting {} from {} to {}", amount, from, to);
+        BigDecimal convertedAmount = currencyConversionService.convertCurrency(amount, from, to);
         logger.info("Converted amount is {}", convertedAmount);
         return ResponseEntity.ok(convertedAmount);
     }
 
     @GetMapping("/rate")
     public ResponseEntity<BigDecimal> getCurrencyRate(
-            @RequestParam Currency sourceCurrency,
-            @RequestParam Currency targetCurrency) {
-        logger.info("Getting rate from {} to {}", sourceCurrency, targetCurrency);
-        BigDecimal rate = currencyConversionService.getCurrencyRate(sourceCurrency, targetCurrency);
-        logger.info("Rate from {} to {} is {}", sourceCurrency, targetCurrency, rate);
+            @RequestParam Currency from,
+            @RequestParam Currency to) {
+        logger.info("Getting rate from {} to {}", from, to);
+        BigDecimal rate = currencyConversionService.getCurrencyRate(from, to);
+        logger.info("Rate from {} to {} is {}", from, to, rate);
         return ResponseEntity.ok(rate);
     }
 

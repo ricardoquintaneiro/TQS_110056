@@ -58,7 +58,7 @@ public class CreditCardController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{number}/validate")
+    @GetMapping("/number/{number}/validate")
     public ResponseEntity<Boolean> validateCreditCardNumber(@PathVariable String number) {
         logger.info("Validating credit card number {}", number);
         boolean isValid = creditCardService.validateCreditCardNumber(number);
@@ -70,7 +70,7 @@ public class CreditCardController {
         return ResponseEntity.ok(isValid);
     }
 
-    @GetMapping("/{cvv}/validate")
+    @GetMapping("/cvv/{cvv}/validate")
     public ResponseEntity<Boolean> validateCVV(@PathVariable String cvv) {
         logger.info("Validating CVV {}", cvv);
         boolean isValid = creditCardService.validateCVV(cvv);
