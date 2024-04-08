@@ -67,6 +67,7 @@ public class Bus {
 
     public void setSeats(List<BusSeat> seats) {
         this.seats = seats;
+        this.seatsAvailability = new boolean[seats.size()];
     }
 
     public boolean[] getSeatsAvailability() {
@@ -75,6 +76,9 @@ public class Bus {
 
     public void setSeatsAvailability(boolean[] seatsAvailability) {
         this.seatsAvailability = seatsAvailability;
+        if (seatsAvailability.length != seats.size()) {
+            throw new IllegalArgumentException("Seats availability array must have the same length as the seats list");
+        }
     }
 
     public boolean getSeatAvailability(int index) {
