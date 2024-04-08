@@ -43,7 +43,7 @@ public class PassengerControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/passengers/1")
+                    .get("/api/passengers/1")
                 .then()
                     .status(HttpStatus.OK)
                     .body("name", Matchers.equalTo(passenger.getName()))
@@ -59,7 +59,7 @@ public class PassengerControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/passengers/10")
+                    .get("/api/passengers/10")
                 .then()
                     .status(HttpStatus.NOT_FOUND);
     }
@@ -74,7 +74,7 @@ public class PassengerControllerTest {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(passenger)
                 .when()
-                    .post("/passengers")
+                    .post("/api/passengers")
                 .then()
                     .status(HttpStatus.CREATED)
                     .body("name", Matchers.equalTo(passenger.getName()))
@@ -93,7 +93,7 @@ public class PassengerControllerTest {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(invalidPassenger)
                 .when()
-                    .post("/passengers")
+                    .post("/api/passengers")
                 .then()
                     .status(HttpStatus.BAD_REQUEST);
     }
@@ -106,7 +106,7 @@ public class PassengerControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .delete("/passengers/1")
+                    .delete("/api/passengers/1")
                 .then()
                     .status(HttpStatus.NO_CONTENT);
     }

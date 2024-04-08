@@ -20,7 +20,7 @@ import pt.ua.tqs110056.busticketbackend.model.BusSeatType;
 import pt.ua.tqs110056.busticketbackend.service.BusService;
 
 @RestController
-@RequestMapping("/buses")
+@RequestMapping("/api/buses")
 public class BusController {
 
     private static final Logger logger = LoggerFactory.getLogger(BusController.class);

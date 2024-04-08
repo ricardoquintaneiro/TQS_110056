@@ -42,7 +42,7 @@ public class TripControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/trips?originId=1&destinationId=2")
+                    .get("/api/trips?originId=1&destinationId=2")
                 .then()
                     .status(HttpStatus.OK)
                     .body("[0].id", Matchers.equalTo(trip.getId().intValue()));
@@ -56,7 +56,7 @@ public class TripControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/trips")
+                    .get("/api/trips")
                 .then()
                     .status(HttpStatus.OK)
                     .body("[0].id", Matchers.equalTo(trip.getId().intValue()));
@@ -68,7 +68,7 @@ public class TripControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/trips?originId=1")
+                    .get("/api/trips?originId=1")
                 .then()
                     .status(HttpStatus.BAD_REQUEST);
     }

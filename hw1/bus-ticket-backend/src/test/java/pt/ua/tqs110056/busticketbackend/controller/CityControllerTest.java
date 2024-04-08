@@ -48,7 +48,7 @@ public class CityControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/cities")
+                    .get("/api/cities")
                 .then()
                     .status(HttpStatus.OK)
                     .body("name", Matchers.hasItem(aveiro.getName()))
@@ -63,7 +63,7 @@ public class CityControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/cities/1")
+                    .get("/api/cities/1")
                 .then()
                     .status(HttpStatus.OK)
                     .body("name", Matchers.equalTo(aveiro.getName()))
@@ -78,7 +78,7 @@ public class CityControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/cities/-1")
+                    .get("/api/cities/-1")
                 .then()
                     .status(HttpStatus.NOT_FOUND);
     }
@@ -91,7 +91,7 @@ public class CityControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/cities/search?name=Aveiro&country=Portugal")
+                    .get("/api/cities/search?name=Aveiro&country=Portugal")
                 .then()
                     .status(HttpStatus.OK)
                     .body("name", Matchers.equalTo(aveiro.getName()))
@@ -106,7 +106,7 @@ public class CityControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/cities/search?name=Unknown&country=Unknown")
+                    .get("/api/cities/search?name=Unknown&country=Unknown")
                 .then()
                     .status(HttpStatus.NOT_FOUND);
     }

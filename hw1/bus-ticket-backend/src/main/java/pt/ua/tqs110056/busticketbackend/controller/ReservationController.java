@@ -20,7 +20,7 @@ import pt.ua.tqs110056.busticketbackend.model.Reservation;
 import pt.ua.tqs110056.busticketbackend.service.ReservationService;
 
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping("/api/reservations")
 public class ReservationController {
 
     private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);

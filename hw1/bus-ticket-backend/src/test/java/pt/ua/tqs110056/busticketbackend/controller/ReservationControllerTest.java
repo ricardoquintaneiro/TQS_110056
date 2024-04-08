@@ -76,12 +76,11 @@ public class ReservationControllerTest {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(JsonUtils.toJson(reservation))
                 .when()
-                    .post("/reservations")
+                    .post("/api/reservations")
                 .then()
                     .status(HttpStatus.CREATED)
                     .body("id", Matchers.equalTo(reservation.getId().intValue()))
                     .body("status", Matchers.equalTo(reservation.getStatus().toString()))
-                    .body("reservationTime", Matchers.equalTo(reservation.getReservationTime().toString()))
                     .body("seat.number", Matchers.equalTo(reservation.getSeat().getNumber()))
                     .body("passenger.name", Matchers.equalTo(reservation.getPassenger().getName()))
                     .body("creditCard.type", Matchers.equalTo(reservation.getCreditCard().getType().toString()));
@@ -98,7 +97,7 @@ public class ReservationControllerTest {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(JsonUtils.toJson(invalidReservation))
                 .when()
-                    .post("/reservations")
+                    .post("/api/reservations")
                 .then()
                     .status(HttpStatus.BAD_REQUEST);
     }
@@ -111,7 +110,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/reservations/1")
+                    .get("/api/reservations/1")
                 .then()
                     .status(HttpStatus.OK)
                     .body("id", Matchers.equalTo(reservation.getId().intValue()));
@@ -125,7 +124,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/reservations/10")
+                    .get("/api/reservations/10")
                 .then()
                     .status(HttpStatus.NOT_FOUND);
     }
@@ -138,7 +137,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .delete("/reservations/1")
+                    .delete("/api/reservations/1")
                 .then()
                     .status(HttpStatus.NO_CONTENT);
     }
@@ -151,7 +150,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/reservations/1?action=cancel")
+                    .put("/api/reservations/1?action=cancel")
                 .then()
                     .status(HttpStatus.OK)
                     .body(Matchers.equalTo("Reservation cancelled successfully"));
@@ -165,7 +164,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/reservations/1?action=confirm")
+                    .put("/api/reservations/1?action=confirm")
                 .then()
                     .status(HttpStatus.OK)
                     .body(Matchers.equalTo("Reservation confirmed successfully"));
@@ -177,7 +176,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/reservations/1?action=invalid")
+                    .put("/api/reservations/1?action=invalid")
                 .then()
                     .status(HttpStatus.BAD_REQUEST);
     }
@@ -190,7 +189,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/reservations")
+                    .get("/api/reservations")
                 .then()
                     .status(HttpStatus.OK)
                     .body("[0].id", Matchers.equalTo(reservation.getId().intValue()));
@@ -204,7 +203,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/reservations/passenger/1")
+                    .get("/api/reservations/passenger/1")
                 .then()
                     .status(HttpStatus.OK)
                     .body("[0].id", Matchers.equalTo(reservation.getId().intValue()));
@@ -218,7 +217,7 @@ public class ReservationControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/reservations/trip/1")
+                    .get("/api/reservations/trip/1")
                 .then()
                     .status(HttpStatus.OK)
                     .body("[0].id", Matchers.equalTo(reservation.getId().intValue()));

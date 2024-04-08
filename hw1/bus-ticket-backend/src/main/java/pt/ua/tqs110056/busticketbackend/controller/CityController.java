@@ -17,7 +17,7 @@ import pt.ua.tqs110056.busticketbackend.model.City;
 import pt.ua.tqs110056.busticketbackend.service.CityService;
 
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/api/cities")
 public class CityController {
 
     private static final Logger logger = LoggerFactory.getLogger(CityController.class);

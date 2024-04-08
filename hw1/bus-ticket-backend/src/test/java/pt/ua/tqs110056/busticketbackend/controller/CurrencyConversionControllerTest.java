@@ -38,7 +38,7 @@ public class CurrencyConversionControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/currency/convert?from=EUR&to=USD&amount=1.0")
+                    .get("/api/currency/convert?from=EUR&to=USD&amount=1.0")
                 .then()
                     .status(HttpStatus.OK)
                     .body(Matchers.equalTo("1.2"));
@@ -52,7 +52,7 @@ public class CurrencyConversionControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/currency/rate?from=EUR&to=USD")
+                    .get("/api/currency/rate?from=EUR&to=USD")
                 .then()
                     .status(HttpStatus.OK)
                     .body(Matchers.equalTo("1.2"));
@@ -67,7 +67,7 @@ public class CurrencyConversionControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/currency/rate?from=ABC&to=USD")
+                    .get("/api/currency/rate?from=ABC&to=USD")
                 .then()
                     .status(HttpStatus.BAD_REQUEST);
     }

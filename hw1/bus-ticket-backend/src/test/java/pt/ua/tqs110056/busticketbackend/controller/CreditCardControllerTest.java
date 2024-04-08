@@ -45,7 +45,7 @@ public class CreditCardControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/credit-cards/1")
+                    .get("/api/credit-cards/1")
                 .then()
                     .status(HttpStatus.OK)
                     .body("type", Matchers.equalTo(creditCard.getType().toString()))
@@ -62,7 +62,7 @@ public class CreditCardControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/credit-cards/1")
+                    .get("/api/credit-cards/1")
                 .then()
                     .status(HttpStatus.NOT_FOUND);
     }
@@ -77,7 +77,7 @@ public class CreditCardControllerTest {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(creditCard)
                 .when()
-                    .post("/credit-cards")
+                    .post("/api/credit-cards")
                 .then()
                     .status(HttpStatus.CREATED)
                     .body("type", Matchers.equalTo(creditCard.getType().toString()))
@@ -94,7 +94,7 @@ public class CreditCardControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .delete("/credit-cards/1")
+                    .delete("/api/credit-cards/1")
                 .then()
                     .status(HttpStatus.NO_CONTENT);
     }
@@ -107,7 +107,7 @@ public class CreditCardControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/credit-cards/number/" + creditCard.getNumber() + "/validate")
+                    .get("/api/credit-cards/number/" + creditCard.getNumber() + "/validate")
                 .then()
                     .status(HttpStatus.OK)
                     .body(Matchers.equalTo("true"));
@@ -121,7 +121,7 @@ public class CreditCardControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/credit-cards/cvv/" + creditCard.getCvv() + "/validate")
+                    .get("/api/credit-cards/cvv/" + creditCard.getCvv() + "/validate")
                 .then()
                     .status(HttpStatus.OK)
                     .body(Matchers.equalTo("true"));

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pt.ua.tqs110056.busticketbackend.service.CurrencyConversionService;
 
 @RestController
-@RequestMapping("/currency")
+@RequestMapping("/api/currency")
 public class CurrencyConversionController {
 
     private static final Logger logger = LoggerFactory.getLogger(CurrencyConversionController.class);

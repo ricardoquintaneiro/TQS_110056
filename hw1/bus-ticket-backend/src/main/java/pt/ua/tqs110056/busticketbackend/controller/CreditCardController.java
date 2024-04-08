@@ -19,7 +19,7 @@ import pt.ua.tqs110056.busticketbackend.model.CreditCard;
 import pt.ua.tqs110056.busticketbackend.service.CreditCardService;
 
 @RestController
-@RequestMapping("/credit-cards")
+@RequestMapping("/api/credit-cards")
 public class CreditCardController {
 
     private static final Logger logger = LoggerFactory.getLogger(CreditCardController.class);

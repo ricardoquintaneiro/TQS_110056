@@ -54,7 +54,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{id}", String.valueOf(id))
+                    .get("/api/buses/{id}", String.valueOf(id))
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("plate", Matchers.equalTo("AABBCC"))
@@ -73,7 +73,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{nonExistentId}", String.valueOf(nonExistentId))
+                    .get("/api/buses/{nonExistentId}", String.valueOf(nonExistentId))
                 .then()
                     .statusCode(HttpStatus.NOT_FOUND.value());
     }
@@ -91,7 +91,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses")
+                    .get("/api/buses")
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", Matchers.hasSize(2))
@@ -112,7 +112,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{id}/seats", String.valueOf(id))
+                    .get("/api/buses/{id}/seats", String.valueOf(id))
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", Matchers.hasSize(4))
@@ -134,7 +134,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{id}/seats?type=REGULAR", String.valueOf(id))
+                    .get("/api/buses/{id}/seats?type=REGULAR", String.valueOf(id))
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", Matchers.hasSize(2))
@@ -152,7 +152,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{id}/seats?type=UNKNOWN", String.valueOf(id))
+                    .get("/api/buses/{id}/seats?type=UNKNOWN", String.valueOf(id))
                 .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value());
     }
@@ -166,7 +166,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{id}/seats", String.valueOf(id))
+                    .get("/api/buses/{id}/seats", String.valueOf(id))
                 .then()
                     .statusCode(HttpStatus.NOT_FOUND.value());
     }
@@ -180,7 +180,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{nonExistentId}/seats", String.valueOf(nonExistentId))
+                    .get("/api/buses/{nonExistentId}/seats", String.valueOf(nonExistentId))
                 .then()
                     .statusCode(HttpStatus.NOT_FOUND.value());
     }
@@ -195,7 +195,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/buses/{id}/seats/{seatNumber}?reserve=true", String.valueOf(id), seatNumber)
+                    .put("/api/buses/{id}/seats/{seatNumber}?reserve=true", String.valueOf(id), seatNumber)
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body(Matchers.equalTo("Seat reserved successfully"));
@@ -211,7 +211,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/buses/{id}/seats/{seatNumber}?reserve=true", String.valueOf(id), seatNumber)
+                    .put("/api/buses/{id}/seats/{seatNumber}?reserve=true", String.valueOf(id), seatNumber)
                 .then()
                     .statusCode(HttpStatus.UNPROCESSABLE_ENTITY.value())
                     .body(Matchers.equalTo("Seat not available"));
@@ -227,7 +227,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/buses/{id}/seats/{seatNumber}?reserve=false", String.valueOf(id), seatNumber)
+                    .put("/api/buses/{id}/seats/{seatNumber}?reserve=false", String.valueOf(id), seatNumber)
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body(Matchers.equalTo("Seat made available successfully"));
@@ -243,7 +243,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/buses/{id}/seats/{seatNumber}?reserve=false", String.valueOf(id), seatNumber)
+                    .put("/api/buses/{id}/seats/{seatNumber}?reserve=false", String.valueOf(id), seatNumber)
                 .then()
                     .statusCode(HttpStatus.UNPROCESSABLE_ENTITY.value())
                     .body(Matchers.equalTo("Seat was already available"));
@@ -258,7 +258,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/buses/{id}/seats/all/available", String.valueOf(id))
+                    .put("/api/buses/{id}/seats/all/available", String.valueOf(id))
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body(Matchers.equalTo("All seats made available successfully"));
@@ -273,7 +273,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .put("/buses/{nonExistentId}/seats/all/available", String.valueOf(nonExistentId))
+                    .put("/api/buses/{nonExistentId}/seats/all/available", String.valueOf(nonExistentId))
                 .then()
                     .statusCode(HttpStatus.NOT_FOUND.value());
     }
@@ -288,7 +288,7 @@ public class BusControllerTest {
                 .given()
                     .mockMvc(mockMvc)
                 .when()
-                    .get("/buses/{id}/seats/{seatNumber}/available", String.valueOf(id), seatNumber)
+                    .get("/api/buses/{id}/seats/{seatNumber}/available", String.valueOf(id), seatNumber)
                 .then()
                     .statusCode(HttpStatus.OK.value())
                     .body(Matchers.equalTo("true"));

@@ -15,7 +15,7 @@ import pt.ua.tqs110056.busticketbackend.model.Trip;
 import pt.ua.tqs110056.busticketbackend.service.TripService;
 
 @RestController
-@RequestMapping("/trips")
+@RequestMapping("/api/trips")
 public class TripController {
 
     private static final Logger logger = LoggerFactory.getLogger(TripController.class);
