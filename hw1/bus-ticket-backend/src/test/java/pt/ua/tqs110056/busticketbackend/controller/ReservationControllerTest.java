@@ -1,6 +1,7 @@
 package pt.ua.tqs110056.busticketbackend.controller;
 
 import static org.hamcrest.Matchers.emptyString;
+import static org.hamcrest.Matchers.equalTo;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -185,7 +186,7 @@ public class ReservationControllerTest {
                     .put("/api/reservations/1?action=invalid")
                 .then()
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(emptyString());
+                    .body(equalTo("Invalid action"));
     }
 
     @Test
