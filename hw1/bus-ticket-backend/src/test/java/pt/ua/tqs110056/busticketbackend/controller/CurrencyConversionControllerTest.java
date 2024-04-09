@@ -1,5 +1,7 @@
 package pt.ua.tqs110056.busticketbackend.controller;
 
+import static org.hamcrest.Matchers.emptyString;
+
 import java.math.BigDecimal;
 import java.util.Currency;
 
@@ -69,7 +71,8 @@ public class CurrencyConversionControllerTest {
                 .when()
                     .get("/api/currency/rate?from=ABC&to=USD")
                 .then()
-                    .status(HttpStatus.BAD_REQUEST);
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(emptyString());
     }
     
 }

@@ -1,5 +1,7 @@
 package pt.ua.tqs110056.busticketbackend.controller;
 
+import static org.hamcrest.Matchers.emptyString;
+
 import java.util.Optional;
 
 import org.hamcrest.Matchers;
@@ -61,7 +63,8 @@ public class PassengerControllerTest {
                 .when()
                     .get("/api/passengers/10")
                 .then()
-                    .status(HttpStatus.NOT_FOUND);
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(emptyString());
     }
 
     @Test
@@ -95,7 +98,8 @@ public class PassengerControllerTest {
                 .when()
                     .post("/api/passengers")
                 .then()
-                    .status(HttpStatus.BAD_REQUEST);
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(emptyString());
     }
 
     @Test
@@ -108,7 +112,8 @@ public class PassengerControllerTest {
                 .when()
                     .delete("/api/passengers/1")
                 .then()
-                    .status(HttpStatus.NO_CONTENT);
+                    .status(HttpStatus.NO_CONTENT)
+                    .body(emptyString());
     }
     
 }

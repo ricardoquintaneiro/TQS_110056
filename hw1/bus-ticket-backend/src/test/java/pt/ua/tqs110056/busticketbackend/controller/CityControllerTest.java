@@ -1,5 +1,7 @@
 package pt.ua.tqs110056.busticketbackend.controller;
 
+import static org.hamcrest.Matchers.emptyString;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,7 +82,8 @@ public class CityControllerTest {
                 .when()
                     .get("/api/cities/-1")
                 .then()
-                    .status(HttpStatus.NOT_FOUND);
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(emptyString());
     }
 
     @Test
@@ -108,7 +111,8 @@ public class CityControllerTest {
                 .when()
                     .get("/api/cities/search?name=Unknown&country=Unknown")
                 .then()
-                    .status(HttpStatus.NOT_FOUND);
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(emptyString());
     }
 
 }

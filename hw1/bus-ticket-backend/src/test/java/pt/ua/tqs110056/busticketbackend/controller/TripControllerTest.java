@@ -1,5 +1,7 @@
 package pt.ua.tqs110056.busticketbackend.controller;
 
+import static org.hamcrest.Matchers.emptyString;
+
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -70,6 +72,7 @@ public class TripControllerTest {
                 .when()
                     .get("/api/trips?originId=1")
                 .then()
-                    .status(HttpStatus.BAD_REQUEST);
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(emptyString());
     }
 }

@@ -1,5 +1,7 @@
 package pt.ua.tqs110056.busticketbackend.controller;
 
+import static org.hamcrest.Matchers.emptyString;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -64,7 +66,8 @@ public class CreditCardControllerTest {
                 .when()
                     .get("/api/credit-cards/1")
                 .then()
-                    .status(HttpStatus.NOT_FOUND);
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(emptyString());
     }
 
     @Test
@@ -96,7 +99,8 @@ public class CreditCardControllerTest {
                 .when()
                     .delete("/api/credit-cards/1")
                 .then()
-                    .status(HttpStatus.NO_CONTENT);
+                    .status(HttpStatus.NO_CONTENT)
+                    .body(emptyString());
     }
 
     @Test
