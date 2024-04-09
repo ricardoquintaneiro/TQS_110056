@@ -8,6 +8,7 @@ import { TripsPage } from "./routes/trips"
 import { PurchasePage } from "./routes/purchase"
 import { ConfirmationPage } from "./routes/confirmation"
 import { Root } from "./routes/root"
+import { ReservationsPage } from "./routes/reservations"
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/trips", element: <TripsPage /> },
       { path: "/purchase", element: <PurchasePage /> },
       { path: "/confirmation", element: <ConfirmationPage /> },
+      { path: "/reservations", element: <ReservationsPage /> },
     ],
   },
 ])
