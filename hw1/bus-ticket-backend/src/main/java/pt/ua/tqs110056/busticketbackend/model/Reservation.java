@@ -41,6 +41,7 @@ public class Reservation {
         this.trip = trip;
         this.seat = seat;
         this.creditCard = creditCard;
+        this.status = ReservationStatus.PENDING;
     }
 
     public Long getId() {
