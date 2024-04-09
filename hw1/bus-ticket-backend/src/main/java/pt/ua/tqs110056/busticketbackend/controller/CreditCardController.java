@@ -45,7 +45,7 @@ public class CreditCardController {
 
     @PostMapping
     public ResponseEntity<CreditCard> saveCreditCard(@RequestBody CreditCard creditCard) {
-        logger.info("Saving credit card with number {}", creditCard.getNumber());
+        logger.info("Saving credit card with number {}", creditCard.getNumber().replaceAll("[\n\r]", "_"));
         CreditCard savedCreditCard = creditCardService.saveCreditCard(creditCard);
         logger.info("Credit card saved with id {}", savedCreditCard.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCreditCard);

@@ -45,7 +45,7 @@ public class PassengerController {
 
     @PostMapping
     public ResponseEntity<Passenger> savePassenger(@RequestBody Passenger passenger) {
-        logger.info("Saving passenger with name {}", passenger.getName());
+        logger.info("Saving passenger with name {}", passenger.getName().replaceAll("[\n\r]", "_"));
         Passenger savedPassenger = passengerService.savePassenger(passenger);
         logger.info("Passenger saved with id {}", savedPassenger.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPassenger);

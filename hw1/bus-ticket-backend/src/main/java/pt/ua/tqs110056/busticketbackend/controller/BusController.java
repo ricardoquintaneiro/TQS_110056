@@ -56,9 +56,9 @@ public class BusController {
             @RequestParam(required = false) String type) {
         Optional<List<BusSeat>> seats;
         if (type != null) {
-            logger.info("Fetching seats of type {} for bus with id {}", type, id);
             try {
                 BusSeatType seatType = BusSeatType.valueOf(type.toUpperCase());
+                logger.info("Fetching seats of type {} for bus with id {}", seatType.name(), id);
                 seats = busService.getBusSeatsByType(id, seatType);
                 if (seats.isPresent()) {
                     logger.info("Seats found for bus with id {}", id);
@@ -67,7 +67,7 @@ public class BusController {
                 }
                 return seats.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
             } catch (IllegalArgumentException e) {
-                logger.error("Invalid seat type provided: {}", type);
+                logger.error("Invalid seat type provided");
                 return ResponseEntity.badRequest().build();
             }
         } else {

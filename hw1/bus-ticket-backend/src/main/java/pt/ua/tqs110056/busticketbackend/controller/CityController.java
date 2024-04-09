@@ -51,12 +51,12 @@ public class CityController {
 
     @GetMapping("/search")
     public ResponseEntity<City> getCityByNameAndCountry(@RequestParam String name, @RequestParam String country) {
-        logger.info("Fetching city with name '{}' and country '{}'", name, country);
+        logger.info("Fetching city");
         Optional<City> city = cityService.getCityByNameAndCountry(name, country);
         if (city.isPresent()) {
-            logger.info("City found with name '{}' and country '{}'", name, country);
+            logger.info("City found with name '{}' and country '{}'", city.get().getName(), city.get().getCountry());
         } else {
-            logger.warn("No city found with name '{}' and country '{}'", name, country);
+            logger.warn("No city found with name and country provided");
         }
         return city.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
