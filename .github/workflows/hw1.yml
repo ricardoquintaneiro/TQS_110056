@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    name: Maven package
+    name: Maven verify
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: cd hw1/bus-ticket-backend && mvn -B package --file pom.xml
+      run: cd hw1/bus-ticket-backend && mvn -B verify --file pom.xml
 
   sonar:
     name: Analyze with SonarCloud
