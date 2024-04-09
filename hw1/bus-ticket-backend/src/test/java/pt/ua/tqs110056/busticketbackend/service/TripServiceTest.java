@@ -22,7 +22,7 @@ import pt.ua.tqs110056.busticketbackend.repository.TripRepository;
 import pt.ua.tqs110056.busticketbackend.service.impl.TripServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class TripServiceTest {
+class TripServiceTest {
 
     @Mock
     private TripRepository tripRepository;
@@ -34,7 +34,7 @@ public class TripServiceTest {
     private Trip trip2;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         trip = new Trip();
         trip.setId(1L);
         trip2 = new Trip();
@@ -42,7 +42,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void whenFindTripsByOriginAndDestination_ThenItShouldReturnTrips() {
+    void whenFindTripsByOriginAndDestination_ThenItShouldReturnTrips() {
         City origin = new City("Aveiro", "Portugal");
         origin.setId(1L);
         City destination = new City("Coimbra", "Portugal");
@@ -60,7 +60,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void whenFindTripsByOriginAndDestinationAndNoTripsExists_ThenItShouldReturnEmptyList() {
+    void whenFindTripsByOriginAndDestinationAndNoTripsExists_ThenItShouldReturnEmptyList() {
         List<Trip> trips = List.of();
         Mockito.when(tripRepository.findByOriginIdAndDestinationId(1L, 2L)).thenReturn(trips);
 
@@ -70,7 +70,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void whenFindTripsByDepartureDate_ThenItShouldReturnTrips() {
+    void whenFindTripsByDepartureDate_ThenItShouldReturnTrips() {
         LocalDate departureDate = LocalDate.now();
         trip.setDepartureTime(departureDate.atStartOfDay());
         trip2.setDepartureTime(departureDate.atTime(LocalTime.MAX));
@@ -84,7 +84,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void whenFindTripsByDepartureDateAndNoTripsExists_ThenItShouldReturnEmptyList() {
+    void whenFindTripsByDepartureDateAndNoTripsExists_ThenItShouldReturnEmptyList() {
         LocalDate departureDate = LocalDate.now();
         List<Trip> trips = List.of();
         Mockito.when(tripRepository.findByDepartureTimeBetween(departureDate.atStartOfDay(),
@@ -96,7 +96,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void whenFindTripsByOriginAndDestinationAndDepartureDate_ThenItShouldReturnTrips() {
+    void whenFindTripsByOriginAndDestinationAndDepartureDate_ThenItShouldReturnTrips() {
         City origin = new City("Aveiro", "Portugal");
         origin.setId(1L);
         City destination = new City("Coimbra", "Portugal");
@@ -118,7 +118,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void whenfindAllTrips_ThenItShouldReturnAllTrips() {
+    void whenfindAllTrips_ThenItShouldReturnAllTrips() {
         List<Trip> trips = List.of(trip, trip2);
         Mockito.when(tripRepository.findAll()).thenReturn(trips);
 

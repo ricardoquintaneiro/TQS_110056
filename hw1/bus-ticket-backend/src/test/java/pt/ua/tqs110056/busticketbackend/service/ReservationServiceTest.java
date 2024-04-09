@@ -23,7 +23,7 @@ import pt.ua.tqs110056.busticketbackend.repository.ReservationRepository;
 import pt.ua.tqs110056.busticketbackend.service.impl.ReservationServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class ReservationServiceTest {
+class ReservationServiceTest {
 
     @Mock
     private ReservationRepository reservationRepository;
@@ -34,13 +34,13 @@ public class ReservationServiceTest {
     private Reservation reservation;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         reservation = new Reservation();
         reservation.setId(1L);
     }
 
     @Test
-    public void whenCreateReservation_ThenItShouldReturnSavedReservation() {
+    void whenCreateReservation_ThenItShouldReturnSavedReservation() {
         Mockito.when(reservationRepository.save(reservation)).thenReturn(reservation);
 
         Reservation savedReservation = reservationService.createReservation(reservation);
@@ -49,7 +49,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenGetReservationById_ThenItShouldReturnReservation() {
+    void whenGetReservationById_ThenItShouldReturnReservation() {
         Mockito.when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
 
         Optional<Reservation> foundReservation = reservationService.getReservationById(1L);
@@ -58,7 +58,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenGetReservationByIdAndNoReservationExists_ThenItShouldReturnEmptyOptional() {
+    void whenGetReservationByIdAndNoReservationExists_ThenItShouldReturnEmptyOptional() {
         Mockito.when(reservationRepository.findById(-1L)).thenReturn(Optional.empty());
 
         Optional<Reservation> foundReservation = reservationService.getReservationById(-1L);
@@ -67,14 +67,14 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenDeleteReservationById_ThenItShouldDeleteReservation() {
+    void whenDeleteReservationById_ThenItShouldDeleteReservation() {
         reservationService.deleteReservationById(1L);
 
         Mockito.verify(reservationRepository, Mockito.times(1)).deleteById(1L);
     }
 
     @Test
-    public void whenCancelReservation_ThenItShouldReturnTrue() {
+    void whenCancelReservation_ThenItShouldReturnTrue() {
         Mockito.when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
 
         boolean cancelled = reservationService.cancelReservation(1L);
@@ -83,7 +83,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenCancelReservationAndNoReservationExists_ThenItShouldReturnFalse() {
+    void whenCancelReservationAndNoReservationExists_ThenItShouldReturnFalse() {
         Mockito.when(reservationRepository.findById(-1L)).thenReturn(Optional.empty());
 
         boolean cancelled = reservationService.cancelReservation(-1L);
@@ -92,7 +92,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenGetAllReservations_ThenItShouldReturnAllReservations() {
+    void whenGetAllReservations_ThenItShouldReturnAllReservations() {
         Reservation reservation2 = new Reservation();
         reservation2.setId(2L);
         Mockito.when(reservationRepository.findAll()).thenReturn(List.of(reservation, reservation2));
@@ -105,7 +105,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenGetReservationsByPassengerId_ThenItShouldReturnReservations() {
+    void whenGetReservationsByPassengerId_ThenItShouldReturnReservations() {
         Passenger passenger = new Passenger();
         passenger.setId(1L);
         Reservation reservation2 = new Reservation();
@@ -120,7 +120,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenGetReservationsByNonExistingPassengerId_ThenItShouldReturnEmptyList() {
+    void whenGetReservationsByNonExistingPassengerId_ThenItShouldReturnEmptyList() {
         Mockito.when(reservationRepository.findByPassengerId(-1L)).thenReturn(List.of());
 
         List<Reservation> foundReservations = reservationService.getReservationsByPassengerId(-1L);
@@ -129,7 +129,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenGetReservationsByTripId_ThenItShouldReturnReservations() {
+    void whenGetReservationsByTripId_ThenItShouldReturnReservations() {
         Trip trip = new Trip();
         trip.setId(1L);
         Reservation reservation2 = new Reservation();
@@ -144,7 +144,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenGetReservationsByNonExistingTripId_ThenItShouldReturnEmptyList() {
+    void whenGetReservationsByNonExistingTripId_ThenItShouldReturnEmptyList() {
         Mockito.when(reservationRepository.findByTripId(-1L)).thenReturn(List.of());
 
         List<Reservation> foundReservations = reservationService.getReservationsByTripId(-1L);
@@ -153,7 +153,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenConfirmReservation_ThenItShouldReturnTrue() {
+    void whenConfirmReservation_ThenItShouldReturnTrue() {
         reservation.setStatus(ReservationStatus.PENDING);
         Mockito.when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
 
@@ -164,7 +164,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenConfirmReservationAndNoReservationExists_ThenItShouldReturnFalse() {
+    void whenConfirmReservationAndNoReservationExists_ThenItShouldReturnFalse() {
         reservation.setStatus(ReservationStatus.PENDING);
         Mockito.when(reservationRepository.findById(-1L)).thenReturn(Optional.empty());
 

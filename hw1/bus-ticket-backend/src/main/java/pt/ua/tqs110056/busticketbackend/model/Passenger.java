@@ -25,7 +25,7 @@ public class Passenger {
     }
 
     public boolean isValidPhoneNumber(String phoneNumber) {
-        String phoneNumberPattern = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+        String phoneNumberPattern = "^\\+(?:\\d ?){6,14}\\d$";
         Pattern pattern = Pattern.compile(phoneNumberPattern);
         return pattern.matcher(phoneNumber).matches();
     }

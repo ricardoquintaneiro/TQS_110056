@@ -21,7 +21,7 @@ import pt.ua.tqs110056.busticketbackend.repository.CreditCardRepository;
 import pt.ua.tqs110056.busticketbackend.service.impl.CreditCardServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class CreditCardServiceTest {
+class CreditCardServiceTest {
 
     @Mock
     private CreditCardRepository creditCardRepository;
@@ -32,13 +32,13 @@ public class CreditCardServiceTest {
     private CreditCard creditCard;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         creditCard = new CreditCard(CreditCardType.MASTERCARD, "5555555555554444", "123", LocalDate.now().plusYears(1));
         creditCard.setId(1L);
     }
 
     @Test
-    public void whenGetCreditCardById_ThenItShouldReturnCreditCard() {
+    void whenGetCreditCardById_ThenItShouldReturnCreditCard() {
         Mockito.when(creditCardRepository.findById(1L)).thenReturn(Optional.of(creditCard));
 
         Optional<CreditCard> foundCreditCard = creditCardService.getCreditCardById(1L);
@@ -47,7 +47,7 @@ public class CreditCardServiceTest {
     }
 
     @Test
-    public void whenGetCreditCardByIdAndNoCreditCardExists_ThenItShouldReturnEmptyOptional() {
+    void whenGetCreditCardByIdAndNoCreditCardExists_ThenItShouldReturnEmptyOptional() {
         Mockito.when(creditCardRepository.findById(-1L)).thenReturn(Optional.empty());
 
         Optional<CreditCard> foundCreditCard = creditCardService.getCreditCardById(-1L);
@@ -56,7 +56,7 @@ public class CreditCardServiceTest {
     }
 
     @Test
-    public void whenSaveCreditCard_ThenItShouldReturnSavedCreditCard() {
+    void whenSaveCreditCard_ThenItShouldReturnSavedCreditCard() {
         Mockito.when(creditCardRepository.save(creditCard)).thenReturn(creditCard);
 
         CreditCard savedCreditCard = creditCardService.saveCreditCard(creditCard);
@@ -65,35 +65,35 @@ public class CreditCardServiceTest {
     }
 
     @Test
-    public void whenDeleteCreditCardById_ThenItShouldDeleteCreditCard() {
+    void whenDeleteCreditCardById_ThenItShouldDeleteCreditCard() {
         creditCardService.deleteCreditCardById(1L);
 
         Mockito.verify(creditCardRepository, Mockito.times(1)).deleteById(1L);
     }
 
     @Test
-    public void whenValidateCreditCardNumber_ThenItShouldReturnTrue() {
+    void whenValidateCreditCardNumber_ThenItShouldReturnTrue() {
         boolean isValid = creditCardService.validateCreditCardNumber("5555555555554444");
 
         assertThat(isValid, is(true));
     }
 
     @Test
-    public void whenValidateCreditCardNumber_ThenItShouldReturnFalse() {
+    void whenValidateCreditCardNumber_ThenItShouldReturnFalse() {
         boolean isValid = creditCardService.validateCreditCardNumber("1234567890123456");
 
         assertThat(isValid, is(false));
     }
 
     @Test
-    public void whenValidateCVV_ThenItShouldReturnTrue() {
+    void whenValidateCVV_ThenItShouldReturnTrue() {
         boolean isValid = creditCardService.validateCVV("123");
 
         assertThat(isValid, is(true));
     }
 
     @Test
-    public void whenValidateCVV_ThenItShouldReturnFalse() {
+    void whenValidateCVV_ThenItShouldReturnFalse() {
         boolean isValid = creditCardService.validateCVV("12345");
 
         assertThat(isValid, is(false));

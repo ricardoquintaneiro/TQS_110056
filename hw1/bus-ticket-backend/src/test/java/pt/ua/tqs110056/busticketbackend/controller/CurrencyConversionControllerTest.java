@@ -19,7 +19,7 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import pt.ua.tqs110056.busticketbackend.service.CurrencyConversionService;
 
 @WebMvcTest(CurrencyConversionController.class)
-public class CurrencyConversionControllerTest {
+class CurrencyConversionControllerTest {
 
     @MockBean
     private CurrencyConversionService currencyConversionService;

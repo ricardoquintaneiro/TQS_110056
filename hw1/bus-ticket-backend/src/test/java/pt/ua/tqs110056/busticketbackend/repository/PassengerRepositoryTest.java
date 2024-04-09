@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import pt.ua.tqs110056.busticketbackend.model.Passenger;
 
 @DataJpaTest
-public class PassengerRepositoryTest {
+class PassengerRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -23,7 +23,7 @@ public class PassengerRepositoryTest {
     private PassengerRepository passengerRepository;
 
     @Test
-    public void findById_ShouldReturnPassenger_WhenIdExists() {
+    void findById_ShouldReturnPassenger_WhenIdExists() {
         Passenger passenger = new Passenger();
         entityManager.persistAndFlush(passenger);
 
@@ -34,7 +34,7 @@ public class PassengerRepositoryTest {
     }
 
     @Test
-    public void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
+    void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
         Optional<Passenger> found = passengerRepository.findById(Long.valueOf(-1L));
 
         assertThat(found, is(Optional.empty()));

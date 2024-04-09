@@ -18,7 +18,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import pt.ua.tqs110056.busticketbackend.model.City;
 
 @DataJpaTest
-public class CityRepositoryTest {
+class CityRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -27,7 +27,7 @@ public class CityRepositoryTest {
     private CityRepository cityRepository;
 
     @Test
-    public void findById_ShouldReturnCity_WhenCityExists() {
+    void findById_ShouldReturnCity_WhenCityExists() {
         City city = new City("Lisbon", "Portugal");
         entityManager.persistAndFlush(city);
 
@@ -38,14 +38,14 @@ public class CityRepositoryTest {
     }
 
     @Test
-    public void findById_ShouldReturnEmptyOptional_WhenCityDoesNotExist() {
+    void findById_ShouldReturnEmptyOptional_WhenCityDoesNotExist() {
         Optional<City> found = cityRepository.findById(-1L);
 
         assertThat(found.isPresent(), is(false));
     }
 
     @Test
-    public void findByNameAndCountry_ShouldReturnCity_WhenCityExists() {
+    void findByNameAndCountry_ShouldReturnCity_WhenCityExists() {
         City city = new City("Paris", "France");
         entityManager.persistAndFlush(city);
 
@@ -56,14 +56,14 @@ public class CityRepositoryTest {
     }
 
     @Test
-    public void findByNameAndCountry_ShouldReturnEmptyOptional_WhenCityDoesNotExist() {
+    void findByNameAndCountry_ShouldReturnEmptyOptional_WhenCityDoesNotExist() {
         Optional<City> found = cityRepository.findByNameAndCountry("Nonexistent City", "Nonexistent Country");
 
         assertThat(found.isPresent(), is(false));
     }
 
     @Test
-    public void findAll_ShouldReturnAllCities_WhenCitiesExist() {
+    void findAll_ShouldReturnAllCities_WhenCitiesExist() {
         City lisbon = new City("Lisbon", "Portugal");
         City paris = new City("Paris", "France");
         entityManager.persistAndFlush(lisbon);
@@ -76,7 +76,7 @@ public class CityRepositoryTest {
     }
 
     @Test
-    public void findAll_ShouldReturnEmptyList_WhenNoCitiesExist() {
+    void findAll_ShouldReturnEmptyList_WhenNoCitiesExist() {
         List<City> cities = cityRepository.findAll();
 
         assertThat(cities, is(empty()));

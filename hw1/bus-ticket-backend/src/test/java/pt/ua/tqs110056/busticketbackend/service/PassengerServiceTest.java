@@ -19,7 +19,7 @@ import pt.ua.tqs110056.busticketbackend.repository.PassengerRepository;
 import pt.ua.tqs110056.busticketbackend.service.impl.PassengerServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class PassengerServiceTest {
+class PassengerServiceTest {
 
     @Mock
     private PassengerRepository passengerRepository;
@@ -30,13 +30,13 @@ public class PassengerServiceTest {
     private Passenger passenger;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         passenger = new Passenger("Santos Silva", "santossilva@example.com", "+351123456789");
         passenger.setId(1L);
     }
 
     @Test
-    public void whenGetPassengerById_ThenItShouldReturnPassenger() {
+    void whenGetPassengerById_ThenItShouldReturnPassenger() {
         Mockito.when(passengerRepository.findById(1L)).thenReturn(Optional.of(passenger));
 
         Optional<Passenger> foundPassenger = passengerService.getPassengerById(1L);
@@ -45,7 +45,7 @@ public class PassengerServiceTest {
     }
 
     @Test
-    public void whenGetPassengerByIdAndNoPassengerExists_ThenItShouldReturnEmptyOptional() {
+    void whenGetPassengerByIdAndNoPassengerExists_ThenItShouldReturnEmptyOptional() {
         Mockito.when(passengerRepository.findById(-1L)).thenReturn(Optional.empty());
 
         Optional<Passenger> foundPassenger = passengerService.getPassengerById(-1L);
@@ -54,7 +54,7 @@ public class PassengerServiceTest {
     }
 
     @Test
-    public void whenSavePassenger_ThenItShouldReturnSavedPassenger() {
+    void whenSavePassenger_ThenItShouldReturnSavedPassenger() {
         Mockito.when(passengerRepository.save(passenger)).thenReturn(passenger);
 
         Passenger savedPassenger = passengerService.savePassenger(passenger);
@@ -63,7 +63,7 @@ public class PassengerServiceTest {
     }
 
     @Test
-    public void whenDeletePassengerById_ThenItShouldDeletePassenger() {
+    void whenDeletePassengerById_ThenItShouldDeletePassenger() {
         passengerService.deletePassengerById(1L);
 
         Mockito.verify(passengerRepository, Mockito.times(1)).deleteById(1L);

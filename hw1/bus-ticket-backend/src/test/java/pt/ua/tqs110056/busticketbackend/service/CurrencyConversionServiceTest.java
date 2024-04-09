@@ -21,7 +21,7 @@ import pt.ua.tqs110056.busticketbackend.service.impl.CurrencyConversionResponse;
 import pt.ua.tqs110056.busticketbackend.service.impl.CurrencyConversionServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class CurrencyConversionServiceTest {
+class CurrencyConversionServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
@@ -35,7 +35,7 @@ public class CurrencyConversionServiceTest {
     private static CurrencyConversionResponse response;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         sourceCurrency = Currency.getInstance("EUR");
         targetCurrency = Currency.getInstance("USD");
         conversionRate = BigDecimal.valueOf(1.08);
@@ -44,7 +44,7 @@ public class CurrencyConversionServiceTest {
     }
 
     @Test
-    public void whenConvertCurrency_ThenItShouldReturnConvertedValue() {
+    void whenConvertCurrency_ThenItShouldReturnConvertedValue() {
         BigDecimal amount = BigDecimal.valueOf(13.37);
         Mockito.when(restTemplate.getForObject(ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(response);
 
@@ -54,7 +54,7 @@ public class CurrencyConversionServiceTest {
     }
 
     @Test
-    public void whenGetCurrencyRate_ThenItShouldReturnCurrencyRate() {
+    void whenGetCurrencyRate_ThenItShouldReturnCurrencyRate() {
         Mockito.when(restTemplate.getForObject(ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(response);
 
         BigDecimal currencyRate = currencyConversionService.getCurrencyRate(sourceCurrency, targetCurrency);

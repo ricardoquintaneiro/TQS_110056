@@ -22,7 +22,7 @@ import pt.ua.tqs110056.busticketbackend.model.CreditCardType;
 import pt.ua.tqs110056.busticketbackend.service.CreditCardService;
 
 @WebMvcTest(CreditCardController.class)
-public class CreditCardControllerTest {
+class CreditCardControllerTest {
 
     @MockBean
     private CreditCardService creditCardService;

@@ -19,7 +19,7 @@ import pt.ua.tqs110056.busticketbackend.model.Reservation;
 import pt.ua.tqs110056.busticketbackend.model.Trip;
 
 @DataJpaTest
-public class ReservationRepositoryTest {
+class ReservationRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -28,7 +28,7 @@ public class ReservationRepositoryTest {
     private ReservationRepository reservationRepository;
 
     @Test
-    public void findById_ShouldReturnReservation_WhenIdExists() {
+    void findById_ShouldReturnReservation_WhenIdExists() {
         Reservation reservation = new Reservation();
         entityManager.persistAndFlush(reservation);
 
@@ -38,14 +38,14 @@ public class ReservationRepositoryTest {
     }
 
     @Test
-    public void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
+    void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
         Optional<Reservation> found = reservationRepository.findById(Long.valueOf(-1L));
 
         assertThat(found, is(Optional.empty()));
     }
 
     @Test
-    public void findByPassengerId_ShouldReturnListOfReservations_WhenPassengerIdExists() {
+    void findByPassengerId_ShouldReturnListOfReservations_WhenPassengerIdExists() {
         Passenger passenger = new Passenger();
         Reservation reservation1 = new Reservation();
         reservation1.setPassenger(passenger);
@@ -63,14 +63,14 @@ public class ReservationRepositoryTest {
     }
 
     @Test
-    public void findByPassengerId_ShouldReturnEmptyList_WhenPassengerIdDoesNotExist() {
+    void findByPassengerId_ShouldReturnEmptyList_WhenPassengerIdDoesNotExist() {
         List<Reservation> found = reservationRepository.findByPassengerId(Long.valueOf(-1L));
 
         assertThat(found.isEmpty(), is(true));
     }
 
     @Test
-    public void findByTripIdAndSeatNumber_ShouldReturnReservation_WhenTripIdAndSeatNumberExist() {
+    void findByTripIdAndSeatNumber_ShouldReturnReservation_WhenTripIdAndSeatNumberExist() {
         Reservation reservation = new Reservation();
         Trip trip = new Trip();
         BusSeat busSeat = new BusSeat(BusSeatType.REGULAR, "1A");
@@ -87,14 +87,14 @@ public class ReservationRepositoryTest {
     }
 
     @Test
-    public void findByTripIdAndSeatNumber_ShouldReturnEmptyOptional_WhenTripIdAndSeatNumberDoNotExist() {
+    void findByTripIdAndSeatNumber_ShouldReturnEmptyOptional_WhenTripIdAndSeatNumberDoNotExist() {
         Optional<Reservation> found = reservationRepository.findByTripIdAndSeatNumber(Long.valueOf(-1L), "1A");
 
         assertThat(found, is(Optional.empty()));
     }
 
     @Test
-    public void findByTripId_ShouldReturnReservation_WhenTripIdExists() {
+    void findByTripId_ShouldReturnReservation_WhenTripIdExists() {
         Reservation reservation = new Reservation();
         Trip trip = new Trip();
         reservation.setTrip(trip);
@@ -107,14 +107,14 @@ public class ReservationRepositoryTest {
     }
 
     @Test
-    public void findByTripId_ShouldReturnEmptyList_WhenTripIdDoesNotExist() {
+    void findByTripId_ShouldReturnEmptyList_WhenTripIdDoesNotExist() {
         List<Reservation> found = reservationRepository.findByTripId(Long.valueOf(-1L));
 
         assertThat(found.isEmpty(), is(true));
     }
 
     @Test
-    public void countByTripId_ShouldReturnNumberOfReservations_WhenTripIdExists() {
+    void countByTripId_ShouldReturnNumberOfReservations_WhenTripIdExists() {
         Reservation reservation1 = new Reservation();
         Reservation reservation2 = new Reservation();
         Trip trip = new Trip();

@@ -19,7 +19,7 @@ import pt.ua.tqs110056.busticketbackend.model.Trip;
 
 
 @DataJpaTest
-public class TripRepositoryTest {
+class TripRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -28,7 +28,7 @@ public class TripRepositoryTest {
     private TripRepository tripRepository;
 
     @Test
-    public void findById_ShouldReturnTrip_WhenIdExists() {
+    void findById_ShouldReturnTrip_WhenIdExists() {
         Trip trip = new Trip();
         entityManager.persistAndFlush(trip);
 
@@ -39,14 +39,14 @@ public class TripRepositoryTest {
     }
     
     @Test
-    public void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
+    void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
         Optional<Trip> found = tripRepository.findById(Long.valueOf(-1L));
 
         assertThat(found, is(Optional.empty()));
     }
 
     @Test
-    public void findByOriginAndDestination_ShouldReturnListOfTrips_WhenOriginAndDestinationExist() {
+    void findByOriginAndDestination_ShouldReturnListOfTrips_WhenOriginAndDestinationExist() {
         City aveiro = new City("Aveiro", "Portugal");
         City porto = new City("Porto", "Portugal");
         Trip trip1 = new Trip();
@@ -70,14 +70,14 @@ public class TripRepositoryTest {
     }
 
     @Test
-    public void findByOriginAndDestination_ShouldReturnEmptyList_WhenOriginAndDestinationDoNotExist() {
+    void findByOriginAndDestination_ShouldReturnEmptyList_WhenOriginAndDestinationDoNotExist() {
         List<Trip> found = tripRepository.findByOriginIdAndDestinationId(Long.valueOf(-1L), Long.valueOf(-1L));
 
         assertThat(found.isEmpty(), is(true));
     }
 
     @Test
-    public void findByDepartureTimeBetween_ShouldReturnListOfTrips_WhenDepartureIntervalExists() {
+    void findByDepartureTimeBetween_ShouldReturnListOfTrips_WhenDepartureIntervalExists() {
         LocalDateTime departureTime = LocalDateTime.now();
         LocalDateTime departureStartOfDay = departureTime.toLocalDate().atStartOfDay();
         LocalDateTime departureEndOfDay = departureTime.toLocalDate().atTime(LocalTime.MAX);
@@ -96,7 +96,7 @@ public class TripRepositoryTest {
     }
 
     @Test
-    public void findByDepartureTimeBetween_ShouldReturnEmptyList_WhenDepartureIntervalDoesNotExist() {
+    void findByDepartureTimeBetween_ShouldReturnEmptyList_WhenDepartureIntervalDoesNotExist() {
         LocalDateTime departureTime = LocalDateTime.now();
         LocalDateTime departureStartOfDay = departureTime.toLocalDate().atStartOfDay();
         LocalDateTime departureEndOfDay = departureTime.toLocalDate().atTime(LocalTime.MAX);
@@ -106,7 +106,7 @@ public class TripRepositoryTest {
     }
 
     @Test
-    public void findByOriginIdAndDestinationIdAndDepartureTimeBetween_ShouldReturnListOfTrips_WhenOriginAndDestinationAndDepartureIntervalExist() {
+    void findByOriginIdAndDestinationIdAndDepartureTimeBetween_ShouldReturnListOfTrips_WhenOriginAndDestinationAndDepartureIntervalExist() {
         City aveiro = new City("Aveiro", "Portugal");
         City porto = new City("Porto", "Portugal");
         LocalDateTime departureTime = LocalDateTime.now();
@@ -136,7 +136,7 @@ public class TripRepositoryTest {
     }
 
     @Test
-    public void findByOriginIdAndDestinationIdAndDepartureTimeBetween_ShouldReturnEmptyList_WhenOriginAndDestinationAndDepartureIntervalDoNotExist() {
+    void findByOriginIdAndDestinationIdAndDepartureTimeBetween_ShouldReturnEmptyList_WhenOriginAndDestinationAndDepartureIntervalDoNotExist() {
         LocalDateTime departureTime = LocalDateTime.now();
         LocalDateTime departureStartOfDay = departureTime.toLocalDate().atStartOfDay();
         LocalDateTime departureEndOfDay = departureTime.toLocalDate().atTime(LocalTime.MAX);

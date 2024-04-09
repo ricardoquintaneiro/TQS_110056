@@ -21,7 +21,7 @@ import pt.ua.tqs110056.busticketbackend.repository.CityRepository;
 import pt.ua.tqs110056.busticketbackend.service.impl.CityServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class CityServiceTest {
+class CityServiceTest {
 
     @Mock(lenient = true)
     private CityRepository cityRepository;
@@ -32,13 +32,13 @@ public class CityServiceTest {
     private City aveiro;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         aveiro = new City("Aveiro", "Portugal");
         aveiro.setId(1L);
     }
     
     @Test
-    public void whenGetAllCities_ThenItShouldReturnAllCities() {
+    void whenGetAllCities_ThenItShouldReturnAllCities() {
         City coimbra = new City("Coimbra", "Portugal");
         List<City> cities = new ArrayList<>();
         cities.add(aveiro);
@@ -51,7 +51,7 @@ public class CityServiceTest {
     }
 
     @Test
-    public void whenGetAllCitiesAndNoCityExists_ThenItShouldReturnEmptyList() {
+    void whenGetAllCitiesAndNoCityExists_ThenItShouldReturnEmptyList() {
         List<City> cities = new ArrayList<>();
         Mockito.when(cityRepository.findAll()).thenReturn(cities);
 
@@ -61,7 +61,7 @@ public class CityServiceTest {
     }
 
     @Test
-    public void whenGetCityById_ThenItShouldReturnCity() {
+    void whenGetCityById_ThenItShouldReturnCity() {
         Mockito.when(cityRepository.findById(1L)).thenReturn(Optional.of(aveiro));
 
         Optional<City> foundCity = cityService.getCityById(1L);
@@ -71,7 +71,7 @@ public class CityServiceTest {
     }
 
     @Test
-    public void whenGetCityByIdAndCityDoesNotExist_ThenItShouldReturnEmptyOptional() {
+    void whenGetCityByIdAndCityDoesNotExist_ThenItShouldReturnEmptyOptional() {
         Mockito.when(cityRepository.findById(1L)).thenReturn(Optional.empty());
 
         Optional<City> foundCity = cityService.getCityById(1L);
@@ -80,7 +80,7 @@ public class CityServiceTest {
     }
 
     @Test
-    public void whenGetCityByNameAndCountry_ThenItShouldReturnCity() {
+    void whenGetCityByNameAndCountry_ThenItShouldReturnCity() {
         Mockito.when(cityRepository.findByNameAndCountry("Aveiro", "Portugal")).thenReturn(Optional.of(aveiro));
 
         Optional<City> foundCity = cityService.getCityByNameAndCountry("Aveiro", "Portugal");
@@ -90,7 +90,7 @@ public class CityServiceTest {
     }
 
     @Test
-    public void whenGetCityByNameAndCountryAndCityDoesNotExist_ThenItShouldReturnEmptyOptional() {
+    void whenGetCityByNameAndCountryAndCityDoesNotExist_ThenItShouldReturnEmptyOptional() {
         Mockito.when(cityRepository.findByNameAndCountry("Aveiro", "Portugal")).thenReturn(Optional.empty());
 
         Optional<City> foundCity = cityService.getCityByNameAndCountry("Aveiro", "Portugal");

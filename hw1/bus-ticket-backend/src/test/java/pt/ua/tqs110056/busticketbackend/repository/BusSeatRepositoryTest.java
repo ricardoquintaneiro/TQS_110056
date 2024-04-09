@@ -17,7 +17,7 @@ import pt.ua.tqs110056.busticketbackend.model.BusSeat;
 import pt.ua.tqs110056.busticketbackend.model.BusSeatType;
 
 @DataJpaTest
-public class BusSeatRepositoryTest {
+class BusSeatRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -26,7 +26,7 @@ public class BusSeatRepositoryTest {
     private BusSeatRepository busSeatRepository;
 
     @Test
-    public void findById_ShouldReturnBusSeat_WhenIdExists() {
+    void findById_ShouldReturnBusSeat_WhenIdExists() {
         BusSeat busSeat = new BusSeat(BusSeatType.PRIORITY, "1A");
         entityManager.persistAndFlush(busSeat);
 
@@ -37,14 +37,14 @@ public class BusSeatRepositoryTest {
     }
 
     @Test
-    public void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
+    void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
         Optional<BusSeat> found = busSeatRepository.findById(Long.valueOf(-1));
 
         assertThat(found, is(Optional.empty()));
     }
 
     @Test
-    public void findByType_ShouldReturnListOfBusSeats_WhenTypeExists() {
+    void findByType_ShouldReturnListOfBusSeats_WhenTypeExists() {
         BusSeat busSeat1 = new BusSeat();
         busSeat1.setType(BusSeatType.PREMIUM);
         BusSeat busSeat2 = new BusSeat();

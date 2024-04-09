@@ -42,7 +42,7 @@ public class TripController {
         } else if (departureDate != null) {
             logger.info("Fetching trips with departureDate {}", departureDate);
             return ResponseEntity.ok(tripService.findTripsByDepartureDate(departureDate));
-        } else if (originId == null && destinationId == null && departureDate == null) {
+        } else if (originId == null && destinationId == null) {
             logger.info("Fetching all trips");
             return ResponseEntity.ok(tripService.findAllTrips());
         } else {

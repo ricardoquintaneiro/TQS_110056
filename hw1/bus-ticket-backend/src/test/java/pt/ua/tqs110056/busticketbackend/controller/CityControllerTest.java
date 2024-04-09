@@ -21,7 +21,7 @@ import pt.ua.tqs110056.busticketbackend.model.City;
 import pt.ua.tqs110056.busticketbackend.service.CityService;
 
 @WebMvcTest(CityController.class)
-public class CityControllerTest {
+class CityControllerTest {
 
     @MockBean
     private CityService cityService;

@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import pt.ua.tqs110056.busticketbackend.model.CreditCard;
 
 @DataJpaTest
-public class CreditCardRepositoryTest {
+class CreditCardRepositoryTest {
     
     @Autowired
     private TestEntityManager entityManager;
@@ -23,7 +23,7 @@ public class CreditCardRepositoryTest {
     private CreditCardRepository creditCardRepository;
 
     @Test
-    public void findById_ShouldReturnCreditCard_WhenIdExists() {
+    void findById_ShouldReturnCreditCard_WhenIdExists() {
         CreditCard creditCard = new CreditCard();
         entityManager.persistAndFlush(creditCard);
 
@@ -34,7 +34,7 @@ public class CreditCardRepositoryTest {
     }
 
     @Test
-    public void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
+    void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
         Optional<CreditCard> found = creditCardRepository.findById(Long.valueOf(-1L));
 
         assertThat(found, is(Optional.empty()));

@@ -24,7 +24,7 @@ import pt.ua.tqs110056.busticketbackend.repository.BusRepository;
 import pt.ua.tqs110056.busticketbackend.service.impl.BusServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class BusServiceTest {
+class BusServiceTest {
 
     @Mock(lenient = true)
     private BusRepository busRepository;
@@ -35,13 +35,13 @@ public class BusServiceTest {
     private Bus bus;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         bus = new Bus();
         bus.setId(1L);
     }
 
     @Test
-    public void whenValidId_thenBusShouldBeFound() {
+    void whenValidId_thenBusShouldBeFound() {
         long id = bus.getId();
         Mockito.when(busRepository.findById(id)).thenReturn(Optional.of(bus));
 
@@ -52,7 +52,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenInvalidId_thenBusShouldNotBeFound() {
+    void whenInvalidId_thenBusShouldNotBeFound() {
         long id = -1L;
         Mockito.when(busRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -62,7 +62,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenGetAllBuses_thenAllBusesShouldBeFound() {
+    void whenGetAllBuses_thenAllBusesShouldBeFound() {
         Bus bus2 = new Bus();
         List<Bus> buses = new ArrayList<>();
         buses.add(bus);
@@ -75,7 +75,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenGetAllBusSeats_thenAllBusSeatsShouldBeFound() {
+    void whenGetAllBusSeats_thenAllBusSeatsShouldBeFound() {
         long busId = bus.getId();
         List<BusSeat> busSeats = new ArrayList<>();
         busSeats.add(new BusSeat(BusSeatType.PREMIUM, "31B"));
@@ -90,7 +90,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenGetAllBusSeatsAndBusDoesNotExist_thenItShouldReturnEmptyOptional() {
+    void whenGetAllBusSeatsAndBusDoesNotExist_thenItShouldReturnEmptyOptional() {
         long busId = bus.getId();
         Mockito.when(busRepository.findById(busId)).thenReturn(Optional.empty());
 
@@ -100,7 +100,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenGetBusSeatsByType_thenBusSeatsByTypeShouldBeFound() {
+    void whenGetBusSeatsByType_thenBusSeatsByTypeShouldBeFound() {
         long busId = bus.getId();
         List<BusSeat> busSeats = new ArrayList<>();
         BusSeat premiumSeat = new BusSeat(BusSeatType.PREMIUM, "31B");
@@ -116,7 +116,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenGetBusSeatsByType_AndThereAreNoSeatsOfThatType_thenNoSeatsShouldBeFound() {
+    void whenGetBusSeatsByType_AndThereAreNoSeatsOfThatType_thenNoSeatsShouldBeFound() {
         long busId = bus.getId();
         List<BusSeat> busSeats = new ArrayList<>();
         busSeats.add(new BusSeat(BusSeatType.REGULAR, "14A"));
@@ -130,7 +130,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenGetBusSeatsByTypeAndBusDoesNotExist_thenItShouldReturnEmptyOptional() {
+    void whenGetBusSeatsByTypeAndBusDoesNotExist_thenItShouldReturnEmptyOptional() {
         long busId = bus.getId();
         Mockito.when(busRepository.findById(busId)).thenReturn(Optional.empty());
 
@@ -140,7 +140,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenReserveSeat_thenSeatShouldBeReserved() {
+    void whenReserveSeat_thenSeatShouldBeReserved() {
         long busId = bus.getId();
         String seatNumber = "31B";
         BusSeat seat = new BusSeat(BusSeatType.PREMIUM, seatNumber);
@@ -156,7 +156,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenReserveSeat_AndSeatDoesNotExist_thenSeatShouldNotBeReserved() {
+    void whenReserveSeat_AndSeatDoesNotExist_thenSeatShouldNotBeReserved() {
         long busId = bus.getId();
         String seatNumber = "31B";
         BusSeat seat = new BusSeat(BusSeatType.PREMIUM, "14A");
@@ -171,7 +171,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenMakeSeatAvailable_thenSeatShouldBeAvailable() {
+    void whenMakeSeatAvailable_thenSeatShouldBeAvailable() {
         long busId = bus.getId();
         String seatNumber = "31B";
         BusSeat seat = new BusSeat(BusSeatType.PREMIUM, seatNumber);
@@ -188,7 +188,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenMakeSeatAvailable_AndSeatDoesNotExist_thenSeatShouldNotBeAvailable() {
+    void whenMakeSeatAvailable_AndSeatDoesNotExist_thenSeatShouldNotBeAvailable() {
         long busId = bus.getId();
         String seatNumber = "31B";
         BusSeat seat = new BusSeat(BusSeatType.PREMIUM, "14A");
@@ -203,7 +203,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenMakeAllSeatsAvailable_thenAllSeatsShouldBeAvailable() {
+    void whenMakeAllSeatsAvailable_thenAllSeatsShouldBeAvailable() {
         long busId = bus.getId();
         List<BusSeat> busSeats = new ArrayList<>();
         busSeats.add(new BusSeat(BusSeatType.PREMIUM, "31B"));
@@ -221,7 +221,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenMakeAllSeatsAvailable_AndBusDoesNotExist_thenItShouldReturnFalse() {
+    void whenMakeAllSeatsAvailable_AndBusDoesNotExist_thenItShouldReturnFalse() {
         long busId = bus.getId();
         Mockito.when(busRepository.findById(busId)).thenReturn(Optional.empty());
 
@@ -231,7 +231,7 @@ public class BusServiceTest {
     }
 
     @Test
-    public void whenIsSeatAvailable_ThenItShouldReturnTheSeatAvailability() {
+    void whenIsSeatAvailable_ThenItShouldReturnTheSeatAvailability() {
         long busId = bus.getId();
         String seatNumber1 = "31B";
         String seatNumber2 = "32B";

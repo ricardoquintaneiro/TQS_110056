@@ -20,7 +20,7 @@ import pt.ua.tqs110056.busticketbackend.model.Passenger;
 import pt.ua.tqs110056.busticketbackend.service.PassengerService;
 
 @WebMvcTest(PassengerController.class)
-public class PassengerControllerTest {
+class PassengerControllerTest {
 
     @MockBean
     private PassengerService passengerService;

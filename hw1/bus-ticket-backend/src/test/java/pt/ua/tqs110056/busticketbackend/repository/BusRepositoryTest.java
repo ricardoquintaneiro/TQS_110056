@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @DataJpaTest
-public class BusRepositoryTest {
+class BusRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -33,7 +33,7 @@ public class BusRepositoryTest {
     }
 
     @Test
-    public void findByPlate_ShouldReturnBus_WhenPlateExists() {
+    void findByPlate_ShouldReturnBus_WhenPlateExists() {
         Bus bus = new Bus();
         bus.setPlate("ABC123");
         entityManager.persistAndFlush(bus);
@@ -45,14 +45,14 @@ public class BusRepositoryTest {
     }
 
     @Test
-    public void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
+    void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
         Optional<Bus> found = busRepository.findById(Long.valueOf(-1));
 
         assertThat(found, is(Optional.empty()));
     }
 
     @Test
-    public void findByPlate_ShouldReturnEmptyOptional_WhenPlateDoesNotExist() {
+    void findByPlate_ShouldReturnEmptyOptional_WhenPlateDoesNotExist() {
         Optional<Bus> found = busRepository.findByPlate("NonExistentPlate");
 
         assertThat(found, is(Optional.empty()));

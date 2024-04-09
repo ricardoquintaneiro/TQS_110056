@@ -43,7 +43,7 @@ public class CreditCard {
     }
     
     public static boolean isValidCVV(String cvv) {
-        String cvvPattern = "^[0-9]{3,4}$";
+        String cvvPattern = "^\\d{3,4}$";
         Pattern pattern = Pattern.compile(cvvPattern);
         return pattern.matcher(cvv).matches();
     }
