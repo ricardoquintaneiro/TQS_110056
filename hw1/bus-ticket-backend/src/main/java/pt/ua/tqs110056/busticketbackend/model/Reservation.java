@@ -2,6 +2,7 @@ package pt.ua.tqs110056.busticketbackend.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,16 +17,16 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Passenger passenger;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Trip trip;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private BusSeat seat;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private CreditCard creditCard;
 
     private ReservationStatus status;

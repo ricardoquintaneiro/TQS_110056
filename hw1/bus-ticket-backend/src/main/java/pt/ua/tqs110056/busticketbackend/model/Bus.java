@@ -3,6 +3,7 @@ package pt.ua.tqs110056.busticketbackend.model;
 import java.util.Arrays;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class Bus {
     private String plate;
     private String model;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BusSeat> seats;
 
     private boolean[] seatsAvailability;

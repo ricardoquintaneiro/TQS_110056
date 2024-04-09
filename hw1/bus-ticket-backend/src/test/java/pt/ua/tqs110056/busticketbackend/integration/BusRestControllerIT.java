@@ -7,7 +7,6 @@ import java.util.List;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +24,6 @@ import pt.ua.tqs110056.busticketbackend.model.Bus;
 import pt.ua.tqs110056.busticketbackend.model.BusSeat;
 import pt.ua.tqs110056.busticketbackend.model.BusSeatType;
 import pt.ua.tqs110056.busticketbackend.repository.BusRepository;
-import pt.ua.tqs110056.busticketbackend.repository.BusSeatRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
@@ -50,30 +48,21 @@ public class BusRestControllerIT {
     @Autowired
     private BusRepository repository;
 
-    @Autowired
-    private BusSeatRepository seatRepository;
-
     private Bus bus;
+    private BusSeat seat1;
+    private BusSeat seat2;
+    private List<BusSeat> seats;
 
     @BeforeEach
     public void setUp() {
         RestAssured.port = randomServerPort;
         repository.deleteAll();
-        BusSeat seat1 = new BusSeat(BusSeatType.REGULAR, "1A");
-        BusSeat seat2 = new BusSeat(BusSeatType.PREMIUM, "2A");
-        seatRepository.saveAndFlush(seat1);
-        seatRepository.saveAndFlush(seat2);
-
-        List<BusSeat> seats = List.of(seat1, seat2);
-        bus = new Bus("ACBD12", "Modelo 1", seats);
-        bus.setId(1L);
-        repository.saveAndFlush(bus);
+        createBus();
     }
 
     @AfterEach
     public void resetDb() {
         repository.deleteAll();
-        seatRepository.deleteAll();
     }
 
     @Test
@@ -141,7 +130,6 @@ public class BusRestControllerIT {
     }
 
     @Test
-    @Order(1)
     void whenIsSeatAvailable_thenReturnAvailability() {
         RestAssured
             .given()
@@ -152,5 +140,13 @@ public class BusRestControllerIT {
             .then()
                 .statusCode(HttpStatus.OK.value())
                 .body(equalTo("true")); // Adjust the expectation based on the expected response body
+    }
+
+    private void createBus() {
+        seat1 = new BusSeat(BusSeatType.REGULAR, "1A");
+        seat2 = new BusSeat(BusSeatType.PREMIUM, "2A");
+        seats = List.of(seat1, seat2);
+        bus = new Bus("ACBD12", "Modelo 1", seats);
+        repository.saveAndFlush(bus);
     }
 }
