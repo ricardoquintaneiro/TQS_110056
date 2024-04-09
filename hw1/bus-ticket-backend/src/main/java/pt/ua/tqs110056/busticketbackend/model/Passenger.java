@@ -19,7 +19,7 @@ public class Passenger {
     private String phoneNumber;
 
     public boolean isValidEmail(String email) {
-        String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
+        String emailPattern = "^[a-zA-Z0-9_+&*.-]+@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(emailPattern);
         return pattern.matcher(email).matches();
     }
