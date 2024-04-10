@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
@@ -38,10 +39,14 @@ import pt.ua.tqs110056.busticketbackend.model.CreditCardType;
 import pt.ua.tqs110056.busticketbackend.model.Passenger;
 import pt.ua.tqs110056.busticketbackend.model.Reservation;
 import pt.ua.tqs110056.busticketbackend.model.Trip;
+import pt.ua.tqs110056.busticketbackend.repository.BusRepository;
+import pt.ua.tqs110056.busticketbackend.repository.BusSeatRepository;
 import pt.ua.tqs110056.busticketbackend.repository.ReservationRepository;
+import pt.ua.tqs110056.busticketbackend.repository.TripRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
+@ActiveProfiles("test")
 public class ReservationRestControllerIT {
 
     @Container
@@ -63,6 +68,9 @@ public class ReservationRestControllerIT {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private TripRepository tripRepository;
+
     private Passenger passenger;
     private CreditCard creditCard;
     private Trip trip;
@@ -78,12 +86,14 @@ public class ReservationRestControllerIT {
     public void setUp() {
         RestAssured.port = randomServerPort;
         reservationRepository.deleteAll();
+        tripRepository.deleteAll();
         createReservation();
     }
 
     @AfterEach
     public void resetDb() {
         reservationRepository.deleteAll();
+        tripRepository.deleteAll();
     }
 
     @Test
@@ -171,6 +181,7 @@ public class ReservationRestControllerIT {
         busSeats = List.of(busSeat1, busSeat2);
         bus = new Bus("ABCDEF", "One Model", busSeats);
         trip = new Trip(origin, destination, bus, LocalDateTime.now().plusDays(2), Duration.ofMinutes(40), BigDecimal.valueOf(5.2));
+        tripRepository.saveAndFlush(trip);
         reservation = new Reservation(passenger, trip, busSeat2, creditCard);
         reservationRepository.saveAndFlush(reservation);
     }

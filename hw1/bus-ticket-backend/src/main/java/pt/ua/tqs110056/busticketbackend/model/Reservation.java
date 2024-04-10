@@ -20,10 +20,10 @@ public class Reservation {
     @ManyToOne(cascade = CascadeType.ALL)
     private Passenger passenger;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Trip trip;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     private BusSeat seat;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -43,8 +43,8 @@ public class BusSeat {
         return number;
     }
 
-    public void setNumber(String seatNumber) {
-        this.number = seatNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     @Override
@@ -83,6 +83,7 @@ public class BusSeat {
 
     @Override
     public String toString() {
-        return "BusSeat [id=" + id + ", type=" + type + ", seatNumber=" + number + "]";
+        return "BusSeat [id=" + id + ", type=" + type + ", number=" + number + "]";
     }
+
 }

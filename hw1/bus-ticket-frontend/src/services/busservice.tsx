@@ -9,6 +9,7 @@ export type Bus = {
 }
 
 export type BusSeat = {
+  id: number
   type: BusSeatType
   number: string
 }

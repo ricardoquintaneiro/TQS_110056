@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Trip {
@@ -25,7 +24,7 @@ public class Trip {
     @ManyToOne(cascade = CascadeType.ALL)
     private City destination;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Bus bus;
 
     private LocalDateTime departureTime;

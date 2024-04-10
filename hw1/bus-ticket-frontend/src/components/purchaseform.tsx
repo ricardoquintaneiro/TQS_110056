@@ -15,8 +15,9 @@ export const PurchaseForm = () => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
 
-    const busSeatType = formData.get("bus_seat").split(" - ")[0]
-    const busSeatNumber = formData.get("bus_seat").split(" - ")[1]
+    const busSeatId = parseInt(formData.get("bus_seat").split(" - ")[0])
+    const busSeatType = formData.get("bus_seat").split(" - ")[1]
+    const busSeatNumber = formData.get("bus_seat").split(" - ")[2]
 
     const name: string = formData.get("floating_first_name") + " " + formData.get("floating_last_name")
     const email = formData.get("floating_email")
@@ -29,6 +30,7 @@ export const PurchaseForm = () => {
     const expirationDateValid = new Date(expirationDate.split("/")[1], expirationDate.split("/")[0], 1).toISOString()
 
     const busSeat: BusSeat = {
+      id: busSeatId,
       type: busSeatType,
       number: busSeatNumber,
     }
@@ -59,8 +61,8 @@ export const PurchaseForm = () => {
 
     const response = await saveReservation(reservation)
 
-    if (response.ok) {
-      navigate("/confirmation", { state: { reservation: response.data } })
+    if (response) {
+      navigate("/confirmation", { state: { reservation: response } })
     } else {
       alert("Failed to save reservation")
     }
@@ -83,7 +85,7 @@ export const PurchaseForm = () => {
         >
           <option value="">Select Bus Seat</option>
           {busSeats.map((busSeat, index) => (
-            <option key={index} value={`${busSeat.type} - ${busSeat.number}`}>
+            <option key={index} value={`${busSeat.id} - ${busSeat.type} - ${busSeat.number}`}>
               {busSeat.type} - {busSeat.number}
             </option>
           ))}

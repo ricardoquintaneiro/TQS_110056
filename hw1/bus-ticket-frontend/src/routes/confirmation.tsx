@@ -1,14 +1,15 @@
+import { useLocation } from "react-router-dom"
 import { ConfirmationObject } from "../components/confirmationobject"
-import { ConfirmationTable } from "../components/confirmationtable"
 
 export const ConfirmationPage = () => {
+  
+  const { state } = useLocation()
+  const object = state ? state.reservation : null
+
   return (
-    <>
-      <div>
-        <h1>Confirmation</h1>
-      </div>
-      <ConfirmationTable />
-      <ConfirmationObject />
-    </>
+    <div className="max-w-7xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl h-dvh">
+      <h1 className="text-xl font-semibold mb-4">Confirmation</h1>
+      <ConfirmationObject object={object}/>
+    </div>
   )
 }

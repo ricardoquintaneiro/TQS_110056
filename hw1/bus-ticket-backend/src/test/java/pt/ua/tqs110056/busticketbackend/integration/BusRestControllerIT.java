@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
@@ -27,6 +28,7 @@ import pt.ua.tqs110056.busticketbackend.repository.BusRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
+@ActiveProfiles("test")
 public class BusRestControllerIT {
     
     @Container
@@ -51,6 +53,7 @@ public class BusRestControllerIT {
     private Bus bus;
     private BusSeat seat1;
     private BusSeat seat2;
+    private BusSeat seat3;
     private List<BusSeat> seats;
 
     @BeforeEach
@@ -79,7 +82,8 @@ public class BusRestControllerIT {
 
     @Test
     void whenGetAllBuses_thenAPIReturnsAllBuses() {
-        Bus bus2 = new Bus("ACBD13", "Modelo 2", List.of());
+        seat3 = new BusSeat(BusSeatType.REGULAR, "1B");
+        Bus bus2 = new Bus("ACBD13", "Modelo 2", List.of(seat3));
         repository.saveAndFlush(bus2);
 
         RestAssured
