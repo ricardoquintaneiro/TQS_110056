@@ -3,7 +3,7 @@ import { CreditCard } from "./creditcardservice"
 import { Passenger } from "./passengerservice"
 import { Trip } from "./tripservice"
 
-export const RESERVATIONS_URL = "http://localhost:8080/api/passengers"
+export const RESERVATIONS_URL = "http://localhost:8080/api/reservations"
 
 export type Reservation = {
   passenger: Passenger

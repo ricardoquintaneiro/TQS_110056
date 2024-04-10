@@ -1,6 +1,7 @@
 export const BUSES_URL = "http://localhost:8080/api/buses"
 
 export type Bus = {
+  id?: number
   plate: string
   model: string
   seats: BusSeat[]

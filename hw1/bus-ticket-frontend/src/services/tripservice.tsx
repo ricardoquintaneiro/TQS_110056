@@ -4,12 +4,14 @@ import { City } from "./cityservice"
 export const TRIPS_URL = "http://localhost:8080/api/trips"
 
 export type Trip = {
+    id?: number
     origin: City
     destination: City
     bus: Bus
     departureTime: string
     arrivalTime: string
     ticketPriceInEuro: number // equivalent to BigDecimal in Java
+    ticketPrice?: number
 }
 
 export const findTrips = async (from?: number, to?: number, date?: string) => {
@@ -20,14 +22,14 @@ export const findTrips = async (from?: number, to?: number, date?: string) => {
     if (!isValidDate) {
       throw new Error("Invalid date format. Date must be in YYYY-MM-DD format.")
     }
-    queryParams = `&date=${date}`
+    queryParams = `&departureDate=${date}`
   }
 
   if (from) {
-    queryParams += `&from=${from}`
+    queryParams += `&originId=${from}`
   }
   if (to) {
-    queryParams += `&to=${to}`
+    queryParams += `&destinationId=${to}`
   }
 
   const response = await fetch(

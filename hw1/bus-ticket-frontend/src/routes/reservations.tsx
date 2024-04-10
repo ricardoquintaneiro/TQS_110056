@@ -1,5 +1,3 @@
-import { ReservationsTable } from "../components/reservationstable"
-
 export const ReservationsPage = () => {
   return (
     <>
@@ -7,7 +5,6 @@ export const ReservationsPage = () => {
         <h1>Reservations</h1>
       </div>
       <div>
-        <ReservationsTable />
       </div>
     </>
   )
