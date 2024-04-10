@@ -1,3 +1,6 @@
+import { Bus } from "./busservice"
+import { City } from "./cityservice"
+
 export const TRIPS_URL = "http://localhost:8080/api/trips"
 
 export type Trip = {

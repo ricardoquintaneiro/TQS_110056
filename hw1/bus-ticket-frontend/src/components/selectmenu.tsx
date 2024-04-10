@@ -1,20 +1,23 @@
 import { Fragment, useState } from "react"
 import { Listbox, Transition } from "@headlessui/react"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid"
-
-const people = [
-  {
-    id: 1,
-    name: "Wade Cooper",
-  },
-]
+import { City } from "../services/cityservice"
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ")
 }
 
-export const SelectMenu = () => {
-  const [selected, setSelected] = useState(people[0])
+type SelectMenuProps = {
+  cities: City[]
+  onSelect: (selectedCity: City) => void
+}
+
+export const SelectMenu: React.FC<SelectMenuProps> = ({ cities, onSelect}) => {
+  const [selected, setSelected] = useState(cities[0])
+
+  const handleChange = (selectedCity: City) => {
+    onSelect(selectedCity)
+  }
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -36,21 +39,22 @@ export const SelectMenu = () => {
             <Transition
               show={open}
               as={Fragment}
-              leave="transition ease-in duration-100"
+              leave="transition ease-in duration-10"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
               <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {people.map((person) => (
+                {cities.map((city) => (
                   <Listbox.Option
-                    key={person.id}
+                    key={city.name}
                     className={({ active }) =>
                       classNames(
-                        active ? "bg-indigo-600 text-white" : "text-gray-900",
+                        active ? "bg-blue-500 text-white" : "text-gray-900",
                         "relative cursor-default select-none py-2 pl-3 pr-9"
                       )
                     }
-                    value={person}
+                    value={city}
+                    onClick={() => handleChange(city)}
                   >
                     {({ selected, active }) => (
                       <>
@@ -61,7 +65,7 @@ export const SelectMenu = () => {
                               "ml-3 block truncate"
                             )}
                           >
-                            {person.name}
+                            {city.name}
                           </span>
                         </div>
 
